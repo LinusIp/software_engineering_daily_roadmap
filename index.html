@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NVIDIA Isaac Robotics Master Plan → Q2 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0a0e14;--panel:#121821;--panel2:#1a2230;--border:#243040;--text:#e6edf3;--muted:#8b98a9;--nv:#76b900;--nv2:#9ce000;--accent:#5bc0ff;--purple:#c792ea;--warn:#ffb454;--danger:#ff6b6b}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;padding:20px;max-width:1280px;margin:0 auto}
+  h1{font-size:1.8rem;font-weight:800;letter-spacing:-.02em}h1 span{color:var(--nv)}
+  .sub{color:var(--muted);font-size:.92rem;margin-top:6px}
+  .countdown{background:linear-gradient(135deg,#0d2818,#0a0e14);border:1px solid var(--nv);border-radius:12px;padding:18px 22px;margin:18px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+  .countdown .num{font-family:'JetBrains Mono',monospace;font-size:2rem;font-weight:800;color:var(--nv2)}
+  .countdown small{color:var(--muted);display:block;font-size:.82rem}
+  .progress-wrap{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin:14px 0}
+  .progress-wrap label{font-size:.84rem;color:var(--muted);display:block;margin-bottom:8px}
+  .bar{height:10px;background:var(--panel2);border-radius:6px;overflow:hidden}
+  .bar>div{height:100%;background:linear-gradient(90deg,var(--nv),var(--nv2));width:0;transition:width .4s}
+  .tabs{display:flex;gap:7px;flex-wrap:wrap;margin:18px 0 10px}
+  .tab{padding:9px 14px;border-radius:10px;border:1px solid var(--border);background:var(--panel);cursor:pointer;font-size:.84rem;font-weight:600;color:var(--muted);transition:.2s}
+  .tab.active{background:var(--nv);color:#06120a;border-color:var(--nv)}
+  .phase{display:none}.phase.active{display:block}
+  .pcard{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px 18px;margin:12px 0}
+  .pcard h2{font-size:1.1rem;margin-bottom:4px}.pcard h2 i{font-style:normal;color:var(--nv)}
+  .pcard p.meta{color:var(--muted);font-size:.84rem;margin-bottom:10px}
+  .tag{display:inline-block;background:var(--panel2);border:1px solid var(--border);border-radius:6px;padding:2px 8px;font-size:.72rem;color:var(--muted);margin-right:4px;margin-bottom:2px}
+  .week{background:var(--panel2);border:1px solid var(--border);border-left:3px solid var(--nv);border-radius:10px;padding:12px 15px;margin:10px 0}
+  .wh{font-size:.88rem;font-weight:700;color:var(--nv2);margin-bottom:6px;font-family:'JetBrains Mono',monospace}
+  .chk{display:flex;align-items:flex-start;gap:8px;padding:4px 0;font-size:.84rem}
+  .chk input{margin-top:3px;accent-color:var(--nv);cursor:pointer;width:16px;height:16px;flex-shrink:0}
+  .chk.done{color:var(--muted)}.chk.done>div{text-decoration:line-through}
+  .chk a{color:var(--accent);text-decoration:none}.chk a:hover{text-decoration:underline}
+  .chk b{color:var(--warn);font-family:'JetBrains Mono',monospace;font-size:.8rem}
+  .exp{color:var(--muted);font-size:.78rem;display:block;margin-top:3px;font-style:italic}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:11px;margin-top:10px}
+  .res{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:11px}
+  .res .cat{font-size:.7rem;color:var(--nv2);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+  .res a{color:var(--text);font-weight:600;text-decoration:none;font-size:.88rem;display:block;margin:4px 0 2px}.res a:hover{color:var(--accent)}
+  .res .desc{color:var(--muted);font-size:.78rem}
+  .project{background:var(--panel2);border-left:3px solid var(--nv);border-radius:9px;padding:11px 14px;margin:8px 0}
+  .project b{color:var(--nv2)}.project .stack{color:var(--purple);font-family:'JetBrains Mono',monospace;font-size:.76rem}
+  .routine{display:grid;grid-template-columns:120px 1fr;gap:7px 15px;font-size:.86rem}
+  .routine b{color:var(--nv2);font-family:'JetBrains Mono',monospace}
+  .reset{float:right;background:none;border:1px solid var(--border);color:var(--muted);padding:6px 12px;border-radius:8px;cursor:pointer;font-size:.78rem}
+  .reset:hover{color:var(--danger);border-color:var(--danger)}
+  .legend{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:12px 15px;margin:10px 0;font-size:.82rem;color:var(--muted)}
+  .legend b{color:var(--nv2)}
+  footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:28px;padding-top:16px;border-top:1px solid var(--border)}
+  @media(max-width:640px){.routine{grid-template-columns:1fr}.countdown{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+<h1>🤖 NVIDIA Isaac Robotics <span>Master Plan</span> → Q2 2027</h1>
+<div class="sub">JR2019641 · Isaac Applications Team · 4 hrs/day · Sep 2026 → Mar 2027 · 28 weeks · 196 days</div>
+
+<div class="countdown">
+  <div><div class="num" id="days">—</div><small id="days-label">days remaining</small></div>
+  <div><div class="num" id="checked">0</div><small>daily checkpoints completed (of 196)</small></div>
+</div>
+<div class="progress-wrap">
+  <label>Overall progress (<span id="pct">0</span>%)</label>
+  <div class="bar"><div id="bar"></div></div>
+  <button class="reset" onclick="resetAll()">Reset progress</button>
+</div>
+
+<div class="legend">
+  <b>How to use this plan:</b> Every weekday, complete all 4 blocks (Theory → Coding → Project → Algorithms Drill). 
+  Each day has a checkbox. Click it when done. Progress saves automatically in your browser. 
+  Saturday = 4h deep project work. Sunday = 1-2h review + planning.
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="showPhase(0)">🔵 Phase 1 · Foundations+Systems</div>
+  <div class="tab" onclick="showPhase(1)">🟣 Phase 2 · Sim+AI+Graphics</div>
+  <div class="tab" onclick="showPhase(2)">🟠 Phase 3 · Sim2Real+Deployment</div>
+  <div class="tab" onclick="showPhase(3)">🔴 Phase 4 · Capstone+Apply</div>
+  <div class="tab" onclick="showPhase(4)">📚 Resource Library</div>
+  <div class="tab" onclick="showPhase(5)">🚀 Projects</div>
+  <div class="tab" onclick="showPhase(6)">⏰ Routine</div>
+  <div class="tab" onclick="showPhase(7)">🧠 Learning Path</div>
+</div>
+
+<!-- =========== PHASE 1 =========== -->
+<div class="phase active" id="p0">
+<div class="pcard"><h2>🔵 Phase 1 — Foundations + Systems <i>(Sep–Oct 2026 · W1–W8)</i></h2>
+<p class="meta">Goal: Master C++ (The Cherno), daily algorithms, computer systems, ROS2, robotics math. Ship Project 1.</p>
+<span class="tag">C++</span><span class="tag">Algorithms</span><span class="tag">Systems</span><span class="tag">ROS2</span><span class="tag">Math</span><span class="tag">Databases</span></div>
+
+<div class="week"><div class="wh">W1 · Sep 1–7 · C++ Foundations + Linux Toolchain + Algorithms Start</div>
+<div class="chk"><input type="checkbox" data-id="w1d1"><div><b>D1</b> <a href="https://www.youtube.com/watch?v=18c3MTX0PK0" target="_blank">The Cherno: Welcome to C++</a> <span class="exp">(Install Ubuntu, VSCode, CMake, GCC. Write Hello World. Learn compilation pipeline.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w1d2"><div><b>D2</b> <a href="https://www.youtube.com/watch?v=SfGuIVzE_Os" target="_blank">The Cherno: How C++ Works</a> + <a href="https://neetcode.io/roadmap" target="_blank">NeetCode: Arrays & Hashing #1</a> <span class="exp">(Understand preprocessing, compiling, linking. Solve your first LeetCode easy.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w1d3"><div><b>D3</b> <a href="https://www.youtube.com/watch?v=qqbo3D8hYe4" target="_blank">The Cherno: C++ Compiler & Linker</a> + NeetCode #2 <span class="exp">(Translation units, symbol resolution. Practice Two Sum.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w1d4"><div><b>D4</b> <a href="https://www.youtube.com/watch?v=zOQ3JxJfl3o" target="_blank">The Cherno: Variables & Data Types</a> + NeetCode #3 <span class="exp">(Stack vs Heap memory. Primitive types. Solve Contains Duplicate.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w1d5"><div><b>D5</b> <a href="https://www.youtube.com/watch?v=VJ-gYa4gRmA" target="_blank">The Cherno: Functions & Header Files</a> + NeetCode #4 <span class="exp">(Organize code into .h/.cpp files. Prevent circular dependencies.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w1d6"><div><b>D6</b> <a href="https://docs.python.org/3/tutorial/" target="_blank">Python Tutorial Ch.3-5</a> + NumPy basics + NeetCode #5 <span class="exp">(Lists, dicts, comprehensions. NumPy arrays — essential for PyTorch later.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w1d7"><div><b>D7</b> Git/GitHub workflow · publish first repo · review week 1 <span class="exp">(Push all practice code. Create your learning-log.md file.)</span></div></div>
+</div>
+
+<div class="week"><div class="wh">W2 · Sep 8–14 · C++ Pointers/Memory + ROS2 Install + Algorithms</div>
+<div class="chk"><input type="checkbox" data-id="w2d1"><div><b>D1</b> <a href="https://www.youtube.com/watch?v=2eZ2J5I5cRk" target="_blank">The Cherno: Pointers</a> + NeetCode #6 <span class="exp">(Memory addresses, pointer arithmetic, dereferencing. Critical for robotics C++.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w2d2"><div><b>D2</b> <a href="https://www.youtube.com/watch?v=DWnarqPUsYw" target="_blank">The Cherno: References</a> + NeetCode #7 <span class="exp">(Pass-by-reference, avoiding copies. Solve Valid Anagram.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w2d3"><div><b>D3</b> <a href="https://www.youtube.com/playlist?list=PLLSegLrePWgJudpPUof4-nVFHGkB62Izy" target="_blank">Robotics Back-End: ROS2 Tut 1</a> (install Humble) + NeetCode #8 <span class="exp">(Set up ROS2 Humble. Understand what a middleware is.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w2d4"><div><b>D4</b> <a href="https://www.youtube.com/playlist?list=PLLSegLrePWgJudpPUof4-nVFHGkB62Izy" target="_blank">Robotics Back-End: ROS2 Tut 2-3</a> (nodes, workspace) + NeetCode #9 <span class="exp">(Create colcon workspace. Run talker/listener. Your first ROS2 system.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w2d5"><div><b>D5</b> <a href="https://www.youtube.com/playlist?list=PLLSegLrePWgJudpPUof4-nVFHGkB62Izy" target="_blank">Robotics Back-End: ROS2 Tut 4-5</a> (topics Python) + NeetCode #10 <span class="exp">(Write a Python publisher node. Understand pub/sub pattern.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w2d6"><div><b>D6</b> <a href="https://www.youtube.com/watch?v=b0FPeuOTXII" target="_blank">The Cherno: Control Flow</a> + NeetCode #11 <span class="exp">(if/switch/for/while in C++. Practice branching logic.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w2d7"><div><b>D7</b> Write ROS2 publisher in C++ + NeetCode #12 <span class="exp">(Convert your Python publisher to C++. See the difference in boilerplate.)</span></div></div>
+</div>
+
+<div class="week"><div class="wh">W3 · Sep 15–21 · C++ OOP/RAII + ROS2 Services + Computer Systems</div>
+<div class="chk"><input type="checkbox" data-id="w3d1"><div><b>D1</b> <a href="https://www.youtube.com/watch?v=3ayjpDNQpVQ" target="_blank">The Cherno: Classes & Structs</a> + NeetCode #13 <span class="exp">(Encapsulate data and behavior. OOP fundamentals.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w3d2"><div><b>D2</b> <a href="https://www.youtube.com/watch?v=Fo9T4uqqA6c" target="_blank">The Cherno: Constructors & Destructors (RAII)</a> + NeetCode #14 <span class="exp">(Resource Acquisition Is Initialization. Automatic cleanup. Critical pattern.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w3d3"><div><b>D3</b> <a href="https://www.youtube.com/watch?v=NUzMRn5Jz3M" target="_blank">The Cherno: The Stack & The Heap</a> + <a href="https://csapp.cs.cmu.edu/" target="_blank">CSAPP Ch.1: A Tour of Computer Systems</a> <span class="exp">(Memory lifetimes. Read CSAPP to understand what happens under the hood.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w3d4"><div><b>D4</b> <a href="https://www.youtube.com/playlist?list=PLLSegLrePWgJudpPUof4-nVFHGkB62Izy" target="_blank">Robotics Back-End: ROS2 Tut 6-7</a> (services) + NeetCode #15 <span class="exp">(Synchronous request/response in ROS2. When to use services vs topics.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w3d5"><div><b>D5</b> <a href="https://www.youtube.com/playlist?list=PLLSegLrePWgJudpPUof4-nVFHGkB62Izy" target="_blank">Robotics Back-End: ROS2 Tut 8</a> (actions) + NeetCode #16 <span class="exp">(Long-running preemptable tasks. Feedback streams. Perfect for robot motion.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w3d6"><div><b>D6</b> <a href="https://www.youtube.com/watch?v=QTjVrMChYPM" target="_blank">The Cherno: Static</a> + <a href="https://csapp.cs.cmu.edu/" target="_blank">CSAPP Ch.2: Representing Information</a> <span class="exp">(Static linkage. How bits represent integers and floats — crucial for GPU work.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w3d7"><div><b>D7</b> Write ROS2 service server in C++ + NeetCode #17 <span class="exp">(Create a service that returns robot state. Test with ros2 service call.)</span></div></div>
+</div>
+
+<div class="week"><div class="wh">W4 · Sep 22–28 · C++ Templates/STL + ROS2 Packages + Memory Deep Dive</div>
+<div class="chk"><input type="checkbox" data-id="w4d1"><div><b>D1</b> <a href="https://www.youtube.com/watch?v=x55hfOvHm9A" target="_blank">The Cherno: Enums & Typedef</a> + NeetCode #18 <span class="exp">(Strong typing. Type aliases. Safer code.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w4d2"><div><b>D2</b> <a href="https://www.youtube.com/watch?v=Xs-zT6a4iD4" target="_blank">The Cherno: Inheritance</a> + NeetCode #19 <span class="exp">(Derive classes. Virtual destructors. OOP hierarchies.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w4d3"><div><b>D3</b> <a href="https://www.youtube.com/watch?v=u93uU2U5j5k" target="_blank">The Cherno: Virtual Functions & Polymorphism</a> + <a href="https://csapp.cs.cmu.edu/" target="_blank">CSAPP Ch.3: Machine-Level Representation</a> <span class="exp">(Dynamic dispatch. How C++ translates to assembly. Understand vtables.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w4d4"><div><b>D4</b> <a href="https://docs.ros.org/en/humble/Tutorials.html" target="_blank">ROS2 Official: Creating a C++ Package</a> + NeetCode #20 <span class="exp">(CMakeLists.txt, package.xml. The standard ROS2 package structure.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w4d5"><div><b>D5</b> <a href="https://docs.ros.org/en/humble/Tutorials.html" target="_blank">ROS2 Official: Launch Files</a> + NeetCode #21 <span class="exp">(Python launch files. Start multiple nodes with parameters.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w4d6"><div><b>D6</b> <a href="https://www.youtube.com/watch?v=8jLOx1hD3_g" target="_blank">The Cherno: Arrays & Strings</a> + <a href="https://csapp.cs.cmu.edu/" target="_blank">CSAPP Ch.6: Memory Hierarchy</a> <span class="exp">(C-style arrays vs std::vector. Cache hierarchy — why GPU memory matters.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w4d7"><div><b>D7</b> Write ROS2 multi-node launch file + NeetCode #22 <span class="exp">(Launch publisher + subscriber + tf2 together. Your first integrated system.)</span></div></div>
+</div>
+
+<div class="week"><div class="wh">W5 · Sep 29–Oct 5 · Robotics Math + ROS2 TF/URDF + Algorithms: Trees</div>
+<div class="chk"><input type="checkbox" data-id="w5d1"><div><b>D1</b> <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank">3Blue1Brown: Linear Algebra Ch.1-3</a> + NeetCode (Trees #1) <span class="exp">(Vectors, linear combinations, spans. Visual intuition for matrix math.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w5d2"><div><b>D2</b> <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank">3Blue1Brown: Ch.4-5</a> (matmul, determinant) + NeetCode (Trees #2) <span class="exp">(Matrix multiplication as linear transformation. Determinant = area scaling.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w5d3"><div><b>D3</b> <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank">3Blue1Brown: Ch.6-7</a> (inverse, dot/cross) + NeetCode (Trees #3) <span class="exp">(Dot product = projection. Cross product = perpendicular vector. Used in robotics.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w5d4"><div><b>D4</b> <a href="https://docs.ros.org/en/humble/Tutorials.html" target="_blank">ROS2 Official: TF2 Tutorials</a> + NeetCode (Trees #4) <span class="exp">(Coordinate frame transforms over time. The backbone of robot localization.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w5d5"><div><b>D5</b> <a href="https://docs.ros.org/en/humble/Tutorials.html" target="_blank">ROS2 Official: URDF Tutorials</a> + NeetCode (Trees #5) <span class="exp">(XML format to describe robot links and joints. Your robot's physical model.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w5d6"><div><b>D6</b> Write URDF for 2-wheel robot + NeetCode (Trees #6) <span class="exp">(Differential drive: 2 wheels + caster. Define joint types and limits.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w5d7"><div><b>D7</b> Publish TF tree in ROS2 + NeetCode (Trees #7) <span class="exp">(Broadcast transforms between base_link and wheel joints.)</span></div></div>
+</div>
+
+<div class="week"><div class="wh">W6 · Oct 6–12 · Modern Robotics + Nav2 + Databases Intro</div>
+<div class="chk"><input type="checkbox" data-id="w6d1"><div><b>D1</b> <a href="https://www.coursera.org/learn/modernrobotics-course1" target="_blank">Modern Robotics: C-space & DoF</a> + NeetCode (Trees #8) <span class="exp">(Configuration space. Degrees of freedom. Why a robot arm has 6 DoF.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w6d2"><div><b>D2</b> <a href="https://www.coursera.org/learn/modernrobotics-course1" target="_blank">Modern Robotics: Holonomic vs Nonholonomic</a> + NeetCode (Trees #9) <span class="exp">(Constraints. A car is nonholonomic — can't move sideways. A robot arm is holonomic.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w6d3"><div><b>D3</b> <a href="https://www.coursera.org/learn/modernrobotics-course1" target="_blank">Modern Robotics: Rigid-body motion, SO(3)</a> + NeetCode (Trees #10) <span class="exp">(3D rotations. Rotation matrices. The math behind robot orientation.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w6d4"><div><b>D4</b> <a href="https://www.coursera.org/learn/modernrobotics-course1" target="_blank">Modern Robotics: Twists & Wrenches</a> + NeetCode (Trees #11) <span class="exp">(Spatial velocities and forces. Screw theory basics.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w6d5"><div><b>D5</b> <a href="https://www.youtube.com/watch?v=idQb2pB-h2Q" target="_blank">ROS2 Nav2 Crash Course (Part 1)</a> + <a href="https://www.sqlite.org/tutorial.html" target="_blank">SQL basics (SQLite tutorial)</a> <span class="exp">(Nav2 architecture. SQL for logging robot state data.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w6d6"><div><b>D6</b> <a href="https://www.youtube.com/watch?v=idQb2pB-h2Q" target="_blank">Nav2 Crash Course (Part 2, SLAM)</a> + NeetCode (Trees #12) <span class="exp">(Mapping with SLAM Toolbox. SQL CREATE/INSERT/SELECT statements.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w6d7"><div><b>D7</b> Run Nav2 on simulated robot + log path to SQLite + NeetCode (Trees #13) <span class="exp">(Navigate a robot and store its trajectory in a database. Integrate everything.)</span></div></div>
+</div>
+
+<div class="week"><div class="wh">W7 · Oct 13–19 · PID Control + ros2_control + Isaac Sim Intro</div>
+<div class="chk"><input type="checkbox" data-id="w7d1"><div><b>D1</b> <a href="https://www.youtube.com/watch?v=Pi7l8mMjYVE" target="_blank">Steve Brunton: Control Bootcamp (PID)</a> + NeetCode (Trees #14) <span class="exp">(Proportional-Integral-Derivative control. The most common controller in robotics.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w7d2"><div><b>D2</b> <a href="https://www.youtube.com/watch?v=Pi7l8mMjYVE" target="_blank">Steve Brunton: Transfer Functions</a> + NeetCode (Trees #15) <span class="exp">(Mathematical models of dynamic systems. Laplace transforms intuition.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w7d3"><div><b>D3</b> <a href="https://articulatedrobotics.xyz/tutorials/mobile-robot/applications/ros2_control-concepts" target="_blank">Articulated Robotics: ros2_control Concepts</a> + NeetCode (Trees #16) <span class="exp">(Standard hardware interfaces. Why we need a control abstraction layer.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w7d4"><div><b>D4</b> Implement ros2_control diff_drive controller + NeetCode (Trees #17) <span class="exp">(Configure a controller that reads encoders and commands wheel velocities.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w7d5"><div><b>D5</b> <a href="https://www.youtube.com/watch?v=SjVqOqEXXrY" target="_blank">Articulated Robotics: Isaac Sim in 30 min</a> + NeetCode (Trees #18) <span class="exp">(First look at NVIDIA's robotics simulator. GUI navigation.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w7d6"><div><b>D6</b> <a href="https://docs.isaacsim.omniverse.nvidia.com/4.5.0/introduction/quickstart_index.html" target="_blank">Isaac Sim Quickstart (GUI)</a> + NeetCode (Trees #19) <span class="exp">(Omniverse viewport. Spawn basic shapes. Understand the stage concept.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w7d7"><div><b>D7</b> Spawn robot in Isaac Sim + NeetCode (Trees #20) <span class="exp">(Import URDF into Isaac Sim. See your robot in a physics simulation.)</span></div></div>
+</div>
+
+<div class="week"><div class="wh">W8 · Oct 20–26 · Project 1 — ROS2 + Isaac Sim Mobile Robot</div>
+<div class="chk"><input type="checkbox" data-id="w8d1"><div><b>D1</b> Integrate URDF + ros2_control + Isaac Sim <span class="exp">(Bridge your physical model into the simulator. Debug joint axes.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w8d2"><div><b>D2</b> Integrate (continued) + NeetCode (Heaps #1) <span class="exp">(Debug transmission interfaces. Understand hardware_interface::RobotHW.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w8d3"><div><b>D3</b> PID velocity controller in C++ + NeetCode (Heaps #2) <span class="exp">(Write a node that maintains target wheel speeds using PID.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w8d4"><div><b>D4</b> PID tuning + teleop + NeetCode (Heaps #3) <span class="exp">(Tune P/I/D gains for smooth motion. Drive with keyboard teleop.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w8d5"><div><b>D5</b> Sensor integration (Lidar/camera) + NeetCode (Heaps #4) <span class="exp">(Add simulated sensors to URDF. View data in RViz.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w8d6"><div><b>D6</b> Record demo video + README + NeetCode (Heaps #5) <span class="exp">(Screen recording. Document setup steps. Write a good README.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w8d7"><div><b>D7</b> Publish repo <b>ros2-isaac-mobile-robot</b> + NeetCode (Heaps #6) <span class="exp">(Push to GitHub. Add to resume. First major portfolio piece.)</span></div></div>
+</div>
+</div>
+
+<!-- =========== PHASE 2 =========== -->
+<div class="phase" id="p1">
+<div class="pcard"><h2>🟣 Phase 2 — Simulation, AI & Graphics <i>(Nov–Dec 2026 · W9–W16)</i></h2>
+<p class="meta">Goal: Isaac Sim/Lab mastery, Computer Graphics, PyTorch RL + PPO, CUDA, System Architecture. Ship Project 2.</p>
+<span class="tag">Isaac Sim</span><span class="tag">Graphics</span><span class="tag">PyTorch</span><span class="tag">PPO</span><span class="tag">CUDA</span><span class="tag">Algorithms</span></div>
+
+<div class="week"><div class="wh">W9 · Nov 2–8 · Isaac Sim Deep Dive + Graphics Foundations</div>
+<div class="chk"><input type="checkbox" data-id="w9d1"><div><b>D1</b> <a href="https://docs.isaacsim.omniverse.nvidia.com/4.5.0/introduction/quickstart_index.html" target="_blank">Isaac Sim: Quickstart with a Robot</a> + NeetCode (Heaps #7) <span class="exp">(Add a robot to the stage. Move it with the GUI.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w9d2"><div><b>D2</b> <a href="https://docs.isaacsim.omniverse.nvidia.com/4.5.0/introduction/quickstart_index.html" target="_blank">Isaac Sim: Build a Robot in GUI</a> + NeetCode (Heaps #8) <span class="exp">(Assemble joints and links visually. Understand articulations.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w9d3"><div><b>D3</b> <a href="https://docs.isaacsim.omniverse.nvidia.com/4.5.0/introduction/quickstart_index.html" target="_blank">Isaac Sim: Python API</a> + NeetCode (Heaps #9) <span class="exp">(Procedurally generate scenes via code. Omniverse Kit API.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w9d4"><div><b>D4</b> <a href="https://learnopengl.com/Getting-started/OpenGL" target="_blank">LearnOpenGL: OpenGL & Context</a> + NeetCode (Heaps #10) <span class="exp">(Graphics pipeline. Window setup. Why this matters for Isaac Sim internals.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w9d5"><div><b>D5</b> <a href="https://learnopengl.com/Getting-started/Hello-Triangle" target="_blank">LearnOpenGL: Hello Triangle (Shaders)</a> + NeetCode (Heaps #11) <span class="exp">(Vertex & Fragment shaders. GPU rendering pipeline. GLSL basics.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w9d6"><div><b>D6</b> <a href="https://learnopengl.com/Getting-started/Textures" target="_blank">LearnOpenGL: Textures & Transformations</a> + NeetCode (Heaps #12) <span class="exp">(Apply images to 3D objects. Model/View/Projection matrices.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w9d7"><div><b>D7</b> <a href="https://learnopengl.com/Lighting/Basic-Lighting" target="_blank">LearnOpenGL: Basic Lighting</a> + NeetCode (Heaps #13) <span class="exp">(Ambient, diffuse, specular. Phong model. How light works in simulation.)</span></div></div>
+</div>
+
+<div class="week"><div class="wh">W10 · Nov 9–15 · Ray Tracing + Isaac Sim Sensors</div>
+<div class="chk"><input type="checkbox" data-id="w10d1"><div><b>D1</b> <a href="https://raytracing.github.io/books/RayTracingInOneWeekend.html" target="_blank">Ray Tracing: Ch.1-3 (Setup & Sphere)</a> + NeetCode (Heaps #14) <span class="exp">(Build a C++ ray tracer from scratch. Render a simple sphere.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w10d2"><div><b>D2</b> <a href="https://raytracing.github.io/books/RayTracingInOneWeekend.html" target="_blank">Ray Tracing: Materials & Anti-Aliasing</a> + NeetCode (Heaps #15) <span class="exp">(Diffuse metals. Multi-sampling. Understand how cameras render images.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w10d3"><div><b>D3</b> <a href="https://www.youtube.com/watch?v=W3gAzLwfIP0" target="_blank">The Cherno: Welcome to OpenGL (Video 1)</a> + NeetCode (Backtracking #1) <span class="exp">(Start Cherno's C++ graphics series. Solidify rendering concepts in C++.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w10d4"><div><b>D4</b> <a href="https://www.youtube.com/playlist?list=PL2bKqBZg-pzWaX8H_Fk1GqzOBM9XOjGL9" target="_blank">NVIDIA Isaac Sim Tutorials (1-3)</a> + NeetCode (Backtracking #2) <span class="exp">(Core sim concepts. UI. Physics properties.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w10d5"><div><b>D5</b> <a href="https://www.youtube.com/playlist?list=PL2bKqBZg-pzWaX8H_Fk1GqzOBM9XOjGL9" target="_blank">Isaac Sim Tutorials (4-6)</a> + NeetCode (Backtracking #3) <span class="exp">(Sensors, cameras, physics. Set up a Lidar in sim.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w10d6"><div><b>D6</b> <a href="https://www.youtube.com/watch?v=VL4mbskJSVI" target="_blank">Isaac Sim Office Hours</a> + NeetCode (Backtracking #4) <span class="exp">(Watch NVIDIA experts. Absorb vocabulary and workflows.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w10d7"><div><b>D7</b> Custom scene + Lidar/camera sensor + NeetCode (Backtracking #5) <span class="exp">(Build a warehouse environment. Publish sensor data to ROS2 topics.)</span></div></div>
+</div>
+
+<div class="week"><div class="wh">W11 · Nov 16–22 · Isaac Lab Setup + RL Fundamentals</div>
+<div class="chk"><input type="checkbox" data-id="w11d1"><div><b>D1</b> <a href="https://isaac-sim.github.io/IsaacLab/main/source/setup/quickstart.html" target="_blank">Isaac Lab Quickstart (install)</a> + NeetCode (Backtracking #6) <span class="exp">(Install Isaac Lab on top of Isaac Sim. Verify with empty scene.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w11d2"><div><b>D2</b> <a href="https://isaac-sim.github.io/IsaacLab/main/source/tutorials/index.html" target="_blank">Isaac Lab Tutorial 1 (empty scene)</a> + NeetCode (Backtracking #7) <span class="exp">(AppLauncher. SimulationContext. The Isaac Lab API entry points.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w11d3"><div><b>D3</b> <a href="https://isaac-sim.github.io/IsaacLab/main/source/tutorials/index.html" target="_blank">Isaac Lab Tutorial 2 (spawning objects)</a> + NeetCode (Backtracking #8) <span class="exp">(Procedurally add robots and props. The spawners API.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w11d4"><div><b>D4</b> <a href="https://isaac-sim.github.io/IsaacLab/main/source/tutorials/index.html" target="_blank">Isaac Lab Tutorial 3 (rigid body)</a> + NeetCode (Backtracking #9) <span class="exp">(Apply forces. Read body states. Rigid body dynamics.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w11d5"><div><b>D5</b> <a href="https://www.youtube.com/watch?v=nxxzuDqJCzQ" target="_blank">Isaac Lab Office Hours: RL Fundamentals</a> + NeetCode (Backtracking #10) <span class="exp">(Conceptual overview of RL in Isaac Lab. States, actions, rewards, policies.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w11d6"><div><b>D6</b> Run existing Isaac Lab cartpole env + NeetCode (Backtracking #11) <span class="exp">(Execute the pre-built cartpole example. See RL training in action.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w11d7"><div><b>D7</b> Modify cartpole reward + NeetCode (Backtracking #12) <span class="exp">(Change reward function. See how behavior changes. First RL experiment.)</span></div></div>
+</div>
+
+<div class="week"><div class="wh">W12 · Nov 23–29 · Isaac Lab RL Training + PyTorch</div>
+<div class="chk"><input type="checkbox" data-id="w12d1"><div><b>D1</b> <a href="https://isaac-sim.github.io/IsaacLab/main/source/tutorials/03_envs/run_rl_training.html" target="_blank">Isaac Lab RL Training (SB3 cartpole)</a> + NeetCode (Backtracking #13) <span class="exp">(Train an agent using Stable Baselines3. PPO algorithm.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w12d2"><div><b>D2</b> skrl / RSL-RL workflow overview + NeetCode (Backtracking #14) <span class="exp">(Alternative RL libraries. Read Isaac Lab docs on integrations.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w12d3"><div><b>D3</b> Train cartpole to convergence + NeetCode (Backtracking #15) <span class="exp">(Let training run. Monitor with TensorBoard/WandB. Save checkpoints.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w12d4"><div><b>D4</b> <a href="https://medium.com/correll-lab/introduction-to-isaac-lab-reinforcement-learning-with-the-isaac-humanoid-062a4c3f6b99" target="_blank">Isaac Lab Humanoid RL (Medium)</a> + NeetCode (Backtracking #16) <span class="exp">(Read a practical guide. Understand the humanoid environment structure.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w12d5"><div><b>D5</b> Run Isaac Lab humanoid example + NeetCode (Graphs #1) <span class="exp">(Launch the built-in humanoid environment. See it fall over.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w12d6"><div><b>D6</b> Customize humanoid reward + NeetCode (Graphs #2) <span class="exp">(Tweak reward to encourage forward velocity. See if it learns to walk.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w12d7"><div><b>D7</b> Document training + NeetCode (Graphs #3) <span class="exp">(Save training curves. Write notes in your learning log.)</span></div></div>
+</div>
+
+<div class="week"><div class="wh">W13 · Nov 30–Dec 6 · PyTorch RL + PPO From Scratch</div>
+<div class="chk"><input type="checkbox" data-id="w13d1"><div><b>D1</b> <a href="https://spinningup.openai.com/en/latest/spinningup/rl_intro.html" target="_blank">Spinning Up RL Part 1</a> + NeetCode (Graphs #4) <span class="exp">(Core RL terminology: states, actions, policies, rewards, value functions.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w13d2"><div><b>D2</b> <a href="https://spinningup.openai.com/en/latest/spinningup/rl_intro2.html" target="_blank">Spinning Up Part 2 (algorithms)</a> + NeetCode (Graphs #5) <span class="exp">(Q-learning vs Policy Gradients. Actor-Critic methods.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w13d3"><div><b>D3</b> <a href="https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html" target="_blank">Spinning Up Part 3 (PPO background)</a> + NeetCode (Graphs #6) <span class="exp">(Math behind PPO. Trust region optimization. Clipped surrogate objective.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w13d4"><div><b>D4</b> <a href="https://www.youtube.com/watch?v=MEt6rrxH8W4" target="_blank">PPO Implementation Details (Part 1)</a> + NeetCode (Graphs #7) <span class="exp">(Step-by-step PyTorch implementation. 11 core details.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w13d5"><div><b>D5</b> <a href="https://www.youtube.com/watch?v=hlv79rcHws0" target="_blank">PPO with PyTorch (ML with Phil)</a> + NeetCode (Graphs #8) <span class="exp">(Alternative full implementation walkthrough. Reinforce understanding.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w13d6"><div><b>D6</b> <a href="https://docs.pytorch.org/tutorials/intermediate/reinforcement_ppo.html" target="_blank">TorchRL PPO Tutorial</a> + NeetCode (Graphs #9) <span class="exp">(Official PyTorch implementation. Production-quality code structure.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w13d7"><div><b>D7</b> Minimal PPO on CartPole + NeetCode (Graphs #10) <span class="exp">(Train your own PPO agent from scratch. No libraries. Pure PyTorch.)</span></div></div>
+</div>
+
+<div class="week"><div class="wh">W14 · Dec 7–13 · CUDA Programming + System Architecture</div>
+<div class="chk"><input type="checkbox" data-id="w14d1"><div><b>D1</b> <a href="https://developer.nvidia.com/blog/even-easier-introduction-cuda" target="_blank">NVIDIA: Even Easier Intro to CUDA</a> + NeetCode (Graphs #11) <span class="exp">(Write your first parallel kernel. GPU vs CPU execution model.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w14d2"><div><b>D2</b> Write vector-add kernel + profile with Nsight + NeetCode (Graphs #12) <span class="exp">(Profile memory transfers. Understand bandwidth vs compute bound.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w14d3"><div><b>D3</b> <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide" target="_blank">CUDA Programming Guide (model)</a> + NeetCode (Graphs #13) <span class="exp">(Thread hierarchy: grids, blocks, warps. The CUDA execution model.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w14d4"><div><b>D4</b> <a href="https://www.youtube.com/watch?v=86FAWCzIe_4" target="_blank">CUDA Programming Course (Part 1)</a> + <a href="https://csapp.cs.cmu.edu/" target="_blank">CSAPP Ch.6: Memory Hierarchy</a> <span class="exp">(GPU architecture. Cache hierarchy. Why memory coalescing matters.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w14d5"><div><b>D5</b> Naive matrix-mul kernel + NeetCode (Graphs #14) <span class="exp">(Implement matrix multiplication using global memory. Benchmark it.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w14d6"><div><b>D6</b> <a href="https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html" target="_blank">CUDA Best Practices (memory coalescing)</a> + NeetCode (Graphs #15) <span class="exp">(Optimization techniques. Shared memory. Bank conflicts.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w14d7"><div><b>D7</b> Tiled matrix-mul + NeetCode (Graphs #16) <span class="exp">(Use shared memory to reduce global memory latency. 10x speedup.)</span></div></div>
+</div>
+
+<div class="week"><div class="wh">W15 · Dec 14–20 · MuJoCo + Legged Gym + Advanced Algorithms</div>
+<div class="chk"><input type="checkbox" data-id="w15d1"><div><b>D1</b> <a href="https://mujoco.readthedocs.io/en/stable/python.html" target="_blank">MuJoCo Python Docs — Getting Started</a> + NeetCode (1D DP #1) <span class="exp">(Setup MuJoCo. Load a basic XML model. Understand MJCF format.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w15d2"><div><b>D2</b> <a href="https://github.com/google-deepmind/mujoco_menagerie" target="_blank">MuJoCo Menagerie — Clone & Load Quadruped</a> + NeetCode (1D DP #2) <span class="exp">(Explore DeepMind's curated robot models. Load a ANYmal or Spot model.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w15d3"><div><b>D3</b> <a href="https://www.youtube.com/watch?v=CfE8tC7p3vs" target="_blank">Trossen AI: MuJoCo Tutorial</a> + NeetCode (1D DP #3) <span class="exp">(Visual overview of MuJoCo capabilities. Contact-rich simulation.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w15d4"><div><b>D4</b> <a href="https://github.com/leggedrobotics/legged_gym" target="_blank">Legged Gym — README & Config Study</a> + NeetCode (1D DP #4) <span class="exp">(ETH Zurich's framework. Understand the training pipeline structure.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w15d5"><div><b>D5</b> Legged Gym — install & run ANYmal training + NeetCode (1D DP #5) <span class="exp">(Train ANYmal to walk using their pre-built config. Watch it learn.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w15d6"><div><b>D6</b> Inspect domain randomization config + NeetCode (1D DP #6) <span class="exp">(See how friction, mass, control noise are randomized. Key for sim2real.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w15d7"><div><b>D7</b> Modify terrain/reward + NeetCode (1D DP #7) <span class="exp">(Experiment with reward terms. Rough terrain curriculum.)</span></div></div>
+</div>
+
+<div class="week"><div class="wh">W16 · Dec 21–27 · Project 2 — Quadruped Walk in Isaac Lab</div>
+<div class="chk"><input type="checkbox" data-id="w16d1"><div><b>D1</b> <a href="https://www.youtube.com/watch?v=z62oU4hM1xM" target="_blank">Train Custom Quadruped to Walk (Video)</a> + NeetCode (1D DP #8) <span class="exp">(Watch reference tutorial before starting. Understand the workflow.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w16d2"><div><b>D2</b> Set up robot + scene in Isaac Lab + NeetCode (1D DP #9) <span class="exp">(Import a quadruped URDF/USD. Configure the simulation environment.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w16d3"><div><b>D3</b> Reward + observation design + NeetCode (1D DP #10) <span class="exp">(Define what the policy sees and what it was rewarded for. The art of RL.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w16d4"><div><b>D4</b> Train to convergence + NeetCode (1D DP #11) <span class="exp">(Run PPO until the robot learns a stable gait. Monitor TensorBoard.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w16d5"><div><b>D5</b> Export policy (ONNX/PT) + NeetCode (1D DP #12) <span class="exp">(Save the trained network. ONNX format for deployment.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w16d6"><div><b>D6</b> Demo video + README + NeetCode (1D DP #13) <span class="exp">(Record the robot walking. Document your training setup.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w16d7"><div><b>D7</b> Publish <b>isaac-lab-quadruped-walk</b> + NeetCode (1D DP #14) <span class="exp">(Push to GitHub. Second major portfolio piece.)</span></div></div>
+</div>
+</div>
+
+<!-- =========== PHASE 3 =========== -->
+<div class="phase" id="p2">
+<div class="pcard"><h2>🟠 Phase 3 — Real Robots + Sim2Real <i>(Jan–Feb 2027 · W17–W24)</i></h2>
+<p class="meta">Goal: Isaac ROS, sim2real techniques, Jetson deployment, humanoid RL, control theory. Ship Project 3.</p>
+<span class="tag">Isaac ROS</span><span class="tag">Sim2Real</span><span class="tag">Jetson</span><span class="tag">Humanoid</span><span class="tag">MPC</span><span class="tag">Algorithms</span></div>
+
+<div class="week"><div class="wh">W17 · Jan 4–10 · Isaac ROS Getting Started + Perception</div>
+<div class="chk"><input type="checkbox" data-id="w17d1"><div><b>D1</b> <a href="https://nvidia-isaac-ros.github.io/getting_started/index.html" target="_blank">Isaac ROS Getting Started</a> + NeetCode (1D DP #15) <span class="exp">(Setup Isaac ROS development container. Docker-based workflow.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w17d2"><div><b>D2</b> <a href="https://nvidia-isaac-ros.github.io" target="_blank">Isaac ROS Concepts (NITROS)</a> + NeetCode (1D DP #16) <span class="exp">(Hardware acceleration pipeline. How GPU-accelerated ROS2 nodes work.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w17d3"><div><b>D3</b> Isaac ROS image pipeline docs + NeetCode (1D DP #17) <span class="exp">(How images flow through hardware-accelerated nodes. Zero-copy transfers.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w17d4"><div><b>D4</b> <a href="https://github.com/NVIDIA-ISAAC-ROS" target="_blank">Isaac ROS AprilTags — Run</a> + NeetCode (1D DP #18) <span class="exp">(Detect AprilTags in a simulated camera feed. First Isaac ROS pipeline.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w17d5"><div><b>D5</b> Isaac ROS object detection (DOPE/CenterPose) + NeetCode (1D DP #19) <span class="exp">(Run 3D pose estimation models. Detect objects in 6DoF.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w17d6"><div><b>D6</b> <a href="https://developer.nvidia.com/isaac/ros" target="_blank">Isaac ROS Developer Page</a> + NeetCode (1D DP #20) <span class="exp">(Browse all available packages. Understand hardware requirements.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w17d7"><div><b>D7</b> Run perception pipeline in sim + NeetCode (1D DP #21) <span class="exp">(Connect Isaac Sim camera to Isaac ROS detection node. Full pipeline.)</span></div></div>
+</div>
+
+<div class="week"><div class="wh">W18 · Jan 11–17 · Isaac ROS Navigation + VSLAM</div>
+<div class="chk"><input type="checkbox" data-id="w18d1"><div><b>D1</b> Isaac ROS visual SLAM (cuVSLAM) docs + NeetCode (1D DP #22) <span class="exp">(GPU-accelerated visual odometry. Read the documentation.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w18d2"><div><b>D2</b> Run Isaac ROS VSLAM + NeetCode (2D DP #1) <span class="exp">(Execute SLAM on a simulated robot. Map a room.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w18d3"><div><b>D3</b> <a href="https://docs.isaacsim.omniverse.nvidia.com/5.0.0/ros2_tutorials/tutorial_ros2_navigation.html" target="_blank">Isaac Sim ROS2 Navigation Tutorial</a> + NeetCode (2D DP #2) <span class="exp">(Integrate Nav2 with Isaac Sim directly. Full navigation stack.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w18d4"><div><b>D4</b> Nav2 + Isaac ROS integration + NeetCode (2D DP #3) <span class="exp">(Use Isaac ROS for perception, Nav2 for planning. Best of both.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w18d5"><div><b>D5</b> Map a simulated room + NeetCode (2D DP #4) <span class="exp">(Generate 2D occupancy grid using SLAM. Save the map.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w18d6"><div><b>D6</b> Navigate to goal with perception + NeetCode (2D DP #5) <span class="exp">(Send Nav2 goals. Avoid detected obstacles. Autonomous navigation.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w18d7"><div><b>D7</b> Document + commit Nav2 config + NeetCode (2D DP #6) <span class="exp">(Save all config files. Write a launch script. Commit to repo.)</span></div></div>
+</div>
+
+<div class="week"><div class="wh">W19 · Jan 18–24 · Sim2Real Theory + System Identification</div>
+<div class="chk"><input type="checkbox" data-id="w19d1"><div><b>D1</b> <a href="https://lilianweng.github.io/posts/2019-05-05-domain-randomization" target="_blank">Lil'Log: Domain Randomization (Read)</a> + NeetCode (2D DP #7) <span class="exp">(Deep dive into closing the reality gap. Theory behind sim2real.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w19d2"><div><b>D2</b> <a href="https://www.youtube.com/watch?v=ac_W9IgKX2c" target="_blank">Berkeley CS287 Sim2Real Lecture</a> + NeetCode (2D DP #8) <span class="exp">(Academic context for sim2real challenges. Why policies fail in reality.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w19d3"><div><b>D3</b> <a href="https://arxiv.org/abs/1804.10332" target="_blank">Sim-to-Real Agile Locomotion Paper</a> + NeetCode (2D DP #9) <span class="exp">(ETH Zurich's approach. System identification. Actuator networks.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w19d4"><div><b>D4</b> Implement domain randomization config + NeetCode (2D DP #10) <span class="exp">(Write config files to randomize friction, mass, latency in Isaac Lab.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w19d5"><div><b>D5</b> System identification basics + NeetCode (2D DP #11) <span class="exp">(Match sim parameters to real hardware. Measure motor dynamics.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w19d6"><div><b>D6</b> Observation-space design for robustness + NeetCode (2D DP #12) <span class="exp">(Add noise to simulated sensors. Mimic real camera noise.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w19d7"><div><b>D7</b> Write up sim2real notes + NeetCode (2D DP #13) <span class="exp">(Summarize techniques in markdown. Create a sim2real checklist.)</span></div></div>
+</div>
+
+<div class="week"><div class="wh">W20 · Jan 25–31 · NVIDIA Spot Sim2Real + Legged Gym Deploy</div>
+<div class="chk"><input type="checkbox" data-id="w20d1"><div><b>D1</b> <a href="https://developer.nvidia.com/blog/closing-the-sim-to-real-gap-training-spot-quadruped-locomotion-with-nvidia-isaac-lab" target="_blank">NVIDIA Spot Sim2Real Blog (Part 1)</a> + NeetCode (2D DP #14) <span class="exp">(Read NVIDIA's official case study. Training methodology.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w20d2"><div><b>D2</b> <a href="https://developer.nvidia.com/blog/closing-the-sim-to-real-gap-training-spot-quadruped-locomotion-with-nvidia-isaac-lab" target="_blank">NVIDIA Spot Sim2Real Blog (Part 2)</a> + NeetCode (2D DP #15) <span class="exp">(Deployment steps. Hardware integration. Real Spot robot.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w20d3"><div><b>D3</b> Reproduce Spot training config in Isaac Lab + NeetCode (2D DP #16) <span class="exp">(Adapt the blog's reward structure for your robot. Train it.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w20d4"><div><b>D4</b> Legged Gym deployment pipeline study + NeetCode (2D DP #17) <span class="exp">(Review how policies are exported. Understand the deploy script.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w20d5"><div><b>D5</b> Actuator network concept + NeetCode (2D DP #18) <span class="exp">(Model non-ideal motor dynamics in sim. Friction, backlash, latency.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w20d6"><div><b>D6</b> Random pushes + terrain curriculum + NeetCode (2D DP #19) <span class="exp">(Add external disturbances. Make the policy robust to perturbations.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w20d7"><div><b>D7</b> Document + commit configs + NeetCode (2D DP #20) <span class="exp">(Save your training configs. Document hyperparameters.)</span></div></div>
+</div>
+
+<div class="week"><div class="wh">W21 · Feb 1–7 · Jetson Platform Setup + TensorRT</div>
+<div class="chk"><input type="checkbox" data-id="w21d1"><div><b>D1</b> <a href="https://developer.nvidia.com/embedded/learn/tutorials" target="_blank">NVIDIA Jetson Tutorials (Overview)</a> + NeetCode (Greedy #1) <span class="exp">(Familiarize with Jetson ecosystem. Orin Nano, AGX, etc.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w21d2"><div><b>D2</b> <a href="https://www.jetson-ai-lab.com/tutorials" target="_blank">Jetson AI Lab Tutorials</a> + NeetCode (Greedy #2) <span class="exp">(Edge AI model deployment. Run models on Jetson.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w21d3"><div><b>D3</b> JetPack setup guide (read) + NeetCode (Greedy #3) <span class="exp">(Jetson software stack. Flashing process. Container ecosystem.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w21d4"><div><b>D4</b> Run model on Jetson AI Lab (Nano LLM) + NeetCode (Greedy #4) <span class="exp">(If no hardware, read through workflow. Understand the pipeline.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w21d5"><div><b>D5</b> <a href="https://developer.nvidia.com/blog/getting-started-with-edge-ai-on-nvidia-jetson-llms-vlms-and-foundation-models-for-robotics" target="_blank">Edge AI Jetson Blog</a> + NeetCode (Greedy #5) <span class="exp">(How robotics models run on edge. Power constraints. Thermal.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w21d6"><div><b>D6</b> TensorRT inference basics + NeetCode (Greedy #6) <span class="exp">(Convert PyTorch model to TensorRT engine. FP16/INT8 quantization.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w21d7"><div><b>D7</b> Document Jetson env + NeetCode (Greedy #7) <span class="exp">(Save Dockerfiles. Document deployment commands.)</span></div></div>
+</div>
+
+<div class="week"><div class="wh">W22 · Feb 8–14 · Deploy Inference on Jetson</div>
+<div class="chk"><input type="checkbox" data-id="w22d1"><div><b>D1</b> <a href="https://nvidia-isaac-ros.github.io/getting_started/index.html" target="_blank">Isaac ROS on Jetson</a> + NeetCode (Greedy #8) <span class="exp">(Configure Isaac ROS containers for Jetson architecture.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w22d2"><div><b>D2</b> TensorRT optimization of PyTorch model + NeetCode (Greedy #9) <span class="exp">(Benchmark FP16/INT8 vs FP32. Measure latency and throughput.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w22d3"><div><b>D3</b> Run Isaac ROS perception on Jetson + NeetCode (Greedy #10) <span class="exp">(Execute detection pipeline on edge hardware. Or in container.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w22d4"><div><b>D4</b> Measure latency/throughput + NeetCode (Greedy #11) <span class="exp">(Record FPS. Inference time. Memory usage. Power draw.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w22d5"><div><b>D5</b> <a href="https://www.youtube.com/watch?v=luzOblzznIc" target="_blank">Deep RL in Robotics with Jetson (Webinar)</a> + NeetCode (Greedy #12) <span class="exp">(Watch how NVIDIA deploys RL policies on edge devices.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w22d6"><div><b>D6</b> Optimize pipeline + NeetCode (Greedy #13) <span class="exp">(Reduce bottlenecks. NITROS graph optimizations. Batch processing.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w22d7"><div><b>D7</b> Document benchmark + NeetCode (Greedy #14) <span class="exp">(Commit performance report. Include charts in README.)</span></div></div>
+</div>
+
+<div class="week"><div class="wh">W23 · Feb 15–21 · Humanoid RL + Advanced Control</div>
+<div class="chk"><input type="checkbox" data-id="w23d1"><div><b>D1</b> <a href="https://www.figure.ai/news/reinforcement-learning-walking" target="_blank">Figure AI: Natural Humanoid Walk</a> + NeetCode (Greedy #15) <span class="exp">(Industry perspective. How Figure trains their humanoids.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w23d2"><div><b>D2</b> <a href="https://arxiv.org/html/2303.03381v2" target="_blank">Real-World Humanoid Locomotion RL Paper</a> + NeetCode (Greedy #16) <span class="exp">(Technical details. Transformer policies. Terrain adaptation.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w23d3"><div><b>D3</b> <a href="https://github.com/rohanpsingh/LearningHumanoidWalking" target="_blank">LearningHumanoidWalking Repo (Study)</a> + NeetCode (Greedy #17) <span class="exp">(Clone and inspect training code structure. Understand the pipeline.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w23d4"><div><b>D4</b> <a href="https://www.youtube.com/watch?v=FVw8hkolBgM" target="_blank">Humanoid Learns to Walk (Isaac Gym)</a> + NeetCode (Greedy #18) <span class="exp">(Visual inspiration. See what's possible with end-to-end RL.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w23d5"><div><b>D5</b> Run Isaac Lab humanoid env + NeetCode (Greedy #19) <span class="exp">(Launch built-in humanoid environment. See it attempt to walk.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w23d6"><div><b>D6</b> Train humanoid to stand/walk + NeetCode (Greedy #20) <span class="exp">(Attempt to train a policy. Even if it only stands, that's progress.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w23d7"><div><b>D7</b> Document humanoid configs + NeetCode (Greedy #21) <span class="exp">(Commit configs. Write notes on what worked and didn't.)</span></div></div>
+</div>
+
+<div class="week"><div class="wh">W24 · Feb 22–28 · Control (MPC) + Project 3 Sim2Real Deploy</div>
+<div class="chk"><input type="checkbox" data-id="w24d1"><div><b>D1</b> <a href="https://www.youtube.com/watch?v=Pi7l8mMjYVE" target="_blank">Steve Brunton: MPC / Control Bootcamp</a> + NeetCode (Greedy #22) <span class="exp">(Model Predictive Control. Optimization-based control. Why it's better than PID.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w24d2"><div><b>D2</b> <a href="https://www.youtube.com/watch?v=XaD8Lngfkzk" target="_blank">MPC Intro (Lasse Peters)</a> + NeetCode (Intervals #1) <span class="exp">(Academic lecture on MPC formulation. Cost function design.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w24d3"><div><b>D3</b> <a href="https://www.youtube.com/watch?v=0MNVhXEX9to" target="_blank">Steve Brunton: RL Meets Control</a> + NeetCode (Intervals #2) <span class="exp">(How RL and MPC can be combined. Hierarchical control.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w24d4"><div><b>D4</b> Combine RL policy + low-level PD/MPC + NeetCode (Intervals #3) <span class="exp">(Conceptualize a hierarchical system. RL for high-level, PD for low-level.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w24d5"><div><b>D5</b> <a href="https://irvin.quest/basic-sim2real" target="_blank">Sim2Real First Steps (Jetbot)</a> + NeetCode (Intervals #4) <span class="exp">(Review a practical, simple sim2real pipeline. Learn from others.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w24d6"><div><b>D6</b> Plan capstone sim2real deployment + NeetCode (Intervals #5) <span class="exp">(Write out the architecture. Sim -> Export -> Jetson -> Robot.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w24d7"><div><b>D7</b> Project 3 scaffold + NeetCode (Intervals #6) <span class="exp">(Initialize Git repo. Create folder structure. Write initial README.)</span></div></div>
+</div>
+</div>
+
+<!-- =========== PHASE 4 =========== -->
+<div class="phase" id="p3">
+<div class="pcard"><h2>🔴 Phase 4 — Capstone + Apply <i>(Mar 2027 · W25–W28)</i></h2>
+<p class="meta">Goal: End-to-end sim2real capstone, polished portfolio, interview prep, apply to JR2019641 + Ignite.</p>
+<span class="tag">Capstone</span><span class="tag">Portfolio</span><span class="tag">Interview</span><span class="tag">Apply</span><span class="tag">Algorithms</span></div>
+
+<div class="week"><div class="wh">W25 · Mar 1–7 · Capstone — Sim2Real Locomotion Pipeline</div>
+<div class="chk"><input type="checkbox" data-id="w25d1"><div><b>D1</b> Train RL policy in Isaac Lab (quadruped/humanoid) + NeetCode (Intervals #7) <span class="exp">(Execute training with heavy domain randomization. The core of your capstone.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w25d2"><div><b>D2</b> Continue training + reward tuning + NeetCode (Intervals #8) <span class="exp">(Monitor TensorBoard. Adjust rewards. The art of RL engineering.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w25d3"><div><b>D3</b> Export policy (ONNX/PT) + TensorRT conversion + NeetCode (Intervals #9) <span class="exp">(Convert trained policy for fast inference. Quantize to FP16.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w25d4"><div><b>D4</b> Isaac ROS deployment package (C++) + NeetCode (Intervals #10) <span class="exp">(Write ROS2 C++ node to load policy and publish joint commands.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w25d5"><div><b>D5</b> Integration test in sim + NeetCode (Intervals #11) <span class="exp">(Verify the deployment pipeline works inside Isaac Sim. Full loop.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w25d6"><div><b>D6</b> Latency/perf profiling + NeetCode (Intervals #12) <span class="exp">(Ensure control loop runs at required frequency. 50Hz? 100Hz?)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w25d7"><div><b>D7</b> Commit capstone repo + NeetCode (Intervals #13) <span class="exp">(Push code. The end-to-end pipeline exists. Now polish it.)</span></div></div>
+</div>
+
+<div class="week"><div class="wh">W26 · Mar 8–14 · Capstone Polish + Deploy</div>
+<div class="chk"><input type="checkbox" data-id="w26d1"><div><b>D1</b> Jetson deployment (or simulated Jetson) + NeetCode (Intervals #14) <span class="exp">(Run pipeline on edge hardware or Jetson emulator container.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w26d2"><div><b>D2</b> Deployment debugging + NeetCode (Math #1) <span class="exp">(Fix memory leaks. Timing issues. C++ node debugging.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w26d3"><div><b>D3</b> Latency benchmark + video capture + NeetCode (Math #2) <span class="exp">(Record final performance metrics. Demo of robot moving.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w26d4"><div><b>D4</b> README + architecture diagram + NeetCode (Math #3) <span class="exp">(Draw flowchart: Sim -> Export -> Jetson -> Robot. Professional docs.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w26d5"><div><b>D5</b> Write-up (sim2real analysis) + NeetCode (Math #4) <span class="exp">(Document what randomizations were necessary. What failed. What worked.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w26d6"><div><b>D6</b> Demo video recording + NeetCode (Math #5) <span class="exp">(Edit 2-3 minute video. Training footage + deployment footage.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w26d7"><div><b>D7</b> Publish <b>sim2real-locomotion-capstone</b> + NeetCode (Math #6) <span class="exp">(Make repo public. Add to resume. The showpiece.)</span></div></div>
+</div>
+
+<div class="week"><div class="wh">W27 · Mar 15–21 · Resume + Portfolio + Referral + Interview Prep</div>
+<div class="chk"><input type="checkbox" data-id="w27d1"><div><b>D1</b> Resume rewrite (robotics-focused) + NeetCode (Math #7) <span class="exp">(Highlight Isaac Sim/Lab, C++, Sim2Real. Measurable outcomes.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w27d2"><div><b>D2</b> GitHub portfolio polish + NeetCode (Math #8) <span class="exp">(Pin 4 project repos. Ensure READMEs are pristine. Add badges.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w27d3"><div><b>D3</b> LinkedIn update + reach out to NVIDIA engineers + NeetCode (Math #9) <span class="exp">(Send polite connection requests to Isaac team members. Ask for advice.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w27d4"><div><b>D4</b> <a href="https://igotanoffer.com/en/advice/nvidia-software-engineer-interview" target="_blank">NVIDIA Interview Guide (Read)</a> + NeetCode (Math #10) <span class="exp">(Understand interview structure. What to expect. How to prepare.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w27d5"><div><b>D5</b> <a href="https://www.nvidia.com/en-us/training/self-paced-courses" target="_blank">NVIDIA DLI Cert (Finish if pending)</a> + NeetCode (Math #11) <span class="exp">(Complete a free Deep Learning Institute course. Add to resume.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w27d6"><div><b>D6</b> Behavioral STAR prep + NeetCode (Math #12) <span class="exp">(Write Situation/Task/Action/Result stories. Practice out loud.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w27d7"><div><b>D7</b> Technical mock (C++/ROS2/CUDA Q&A) + NeetCode (Math #13) <span class="exp">(Practice explaining pointers, ROS2 QoS, GPU memory. Out loud.)</span></div></div>
+</div>
+
+<div class="week"><div class="wh">W28 · Mar 22–28 · Mock Interviews + APPLY</div>
+<div class="chk"><input type="checkbox" data-id="w28d1"><div><b>D1</b> Mock interview 1 (C++/algorithms) + NeetCode (Review) <span class="exp">(Practice LeetCode mediums. Focus on memory and pointers.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w28d2"><div><b>D2</b> Mock interview 2 (robotics/CUDA) + NeetCode (Review) <span class="exp">(Explain how you'd optimize a perception pipeline. Whiteboard it.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w28d3"><div><b>D3</b> Mock interview 3 (robot system design) + NeetCode (Review) <span class="exp">(Whiteboard a sim2real data pipeline for a fleet of robots.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w28d4"><div><b>D4</b> <a href="https://www.nvidia.com/en-us/about-nvidia/careers/university-recruiting" target="_blank">Apply: Isaac Robotics Intern (JR2019641)</a> <span class="exp">(Submit application with referral if possible. Include capstone link.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w28d5"><div><b>D5</b> <a href="https://www.nvidia.com/en-us/about-nvidia/careers/university-recruiting" target="_blank">Apply: NVIDIA Ignite (parallel, undergrad)</a> <span class="exp">(Submit to underclassmen program as backup entry path.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w28d6"><div><b>D6</b> Follow-up + portfolio link to recruiter <span class="exp">(Send brief email linking your capstone video. Be professional.)</span></div></div>
+<div class="chk"><input type="checkbox" data-id="w28d7"><div><b>D7</b> Final review · continue daily practice <span class="exp">(Keep coding daily until interview is scheduled. Don't stop now.)</span></div></div>
+</div>
+</div>
+
+<!-- =========== RESOURCES =========== -->
+<div class="phase" id="p4">
+<div class="pcard"><h2>📚 Resource Library</h2><p class="meta">All free. Click any card to open. Organized by category.</p>
+<div class="grid">
+<div class="res"><div class="cat">C++</div><a href="https://www.youtube.com/playlist?list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb" target="_blank">The Cherno — C++</a><div class="desc">Complete playlist. Start here.</div></div>
+<div class="res"><div class="cat">C++</div><a href="https://www.youtube.com/watch?v=W3gAzLwfIP0" target="_blank">The Cherno — OpenGL (Video 1)</a><div class="desc">C++ graphics series.</div></div>
+<div class="res"><div class="cat">Systems</div><a href="https://csapp.cs.cmu.edu/" target="_blank">CSAPP (Computer Systems)</a><div class="desc">The book. Read Ch.1,2,3,6.</div></div>
+<div class="res"><div class="cat">Algorithms</div><a href="https://neetcode.io/roadmap" target="_blank">NeetCode Roadmap</a><div class="desc">Daily practice. Follow the graph.</div></div>
+<div class="res"><div class="cat">Algorithms</div><a href="https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/" target="_blank">MIT 6.006 Algorithms</a><div class="desc">Theory foundations.</div></div>
+<div class="res"><div class="cat">Databases</div><a href="https://www.sqlite.org/tutorial.html" target="_blank">SQLite Tutorial</a><div class="desc">SQL basics for robotics logging.</div></div>
+<div class="res"><div class="cat">Python/ML</div><a href="https://docs.pytorch.org/tutorials/beginner/basics/intro.html" target="_blank">PyTorch Official Tutorials</a><div class="desc">Beginner workflow.</div></div>
+<div class="res"><div class="cat">Python/ML</div><a href="https://www.learnpytorch.io" target="_blank">Zero to Mastery PyTorch</a><div class="desc">Free book + video.</div></div>
+<div class="res"><div class="cat">Math</div><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank">3Blue1Brown — Linear Algebra</a><div class="desc">Geometric intuition.</div></div>
+<div class="res"><div class="cat">Graphics</div><a href="https://learnopengl.com/" target="_blank">LearnOpenGL</a><div class="desc">Definitive free graphics course.</div></div>
+<div class="res"><div class="cat">Graphics</div><a href="https://raytracing.github.io/" target="_blank">Ray Tracing in One Weekend</a><div class="desc">Build a C++ ray tracer.</div></div>
+<div class="res"><div class="cat">ROS2</div><a href="https://docs.ros.org/en/humble/Tutorials.html" target="_blank">ROS2 Humble Official</a><div class="desc">Authoritative reference.</div></div>
+<div class="res"><div class="cat">ROS2</div><a href="https://www.youtube.com/playlist?list=PLLSegLrePWgJudpPUof4-nVFHGkB62Izy" target="_blank">Robotics Back-End — ROS2</a><div class="desc">Step-by-step playlist.</div></div>
+<div class="res"><div class="cat">ROS2</div><a href="https://www.youtube.com/watch?v=idQb2pB-h2Q" target="_blank">ROS2 Nav2 Crash Course</a><div class="desc">Navigation in 1 hour.</div></div>
+<div class="res"><div class="cat">ROS2</div><a href="https://articulatedrobotics.xyz/tutorials/mobile-robot/applications/ros2_control-concepts" target="_blank">ros2_control Concepts</a><div class="desc">Control abstraction.</div></div>
+<div class="res"><div class="cat">Robotics</div><a href="https://www.coursera.org/specializations/modernrobotics" target="_blank">Modern Robotics (Lynch)</a><div class="desc">Kinematics, dynamics.</div></div>
+<div class="res"><div class="cat">Control</div><a href="https://www.youtube.com/watch?v=Pi7l8mMjYVE" target="_blank">Steve Brunton — Control</a><div class="desc">PID, MPC, modern control.</div></div>
+<div class="res"><div class="cat">Control</div><a href="https://www.youtube.com/watch?v=XaD8Lngfkzk" target="_blank">MPC Intro (Peters)</a><div class="desc">Model Predictive Control.</div></div>
+<div class="res"><div class="cat">Isaac Sim</div><a href="https://docs.isaacsim.omniverse.nvidia.com/4.5.0/introduction/quickstart_index.html" target="_blank">Isaac Sim Quickstart</a><div class="desc">Official getting started.</div></div>
+<div class="res"><div class="cat">Isaac Sim</div><a href="https://www.youtube.com/playlist?list=PL2bKqBZg-pzWaX8H_Fk1GqzOBM9XOjGL9" target="_blank">Isaac Sim & Omniverse</a><div class="desc">Official playlist.</div></div>
+<div class="res"><div class="cat">Isaac Lab</div><a href="https://isaac-sim.github.io/IsaacLab/main/source/tutorials/index.html" target="_blank">Isaac Lab Tutorials</a><div class="desc">Framework guide.</div></div>
+<div class="res"><div class="cat">Isaac Lab</div><a href="https://isaac-sim.github.io/IsaacLab/main/source/tutorials/03_envs/run_rl_training.html" target="_blank">Isaac Lab RL Training</a><div class="desc">Train with SB3/PPO.</div></div>
+<div class="res"><div class="cat">Isaac ROS</div><a href="https://nvidia-isaac-ros.github.io" target="_blank">Isaac ROS Docs</a><div class="desc">Main documentation hub.</div></div>
+<div class="res"><div class="cat">Isaac ROS</div><a href="https://github.com/NVIDIA-ISAAC-ROS" target="_blank">Isaac ROS GitHub</a><div class="desc">All repos.</div></div>
+<div class="res"><div class="cat">MuJoCo</div><a href="https://mujoco.readthedocs.io/en/stable/python.html" target="_blank">MuJoCo Python</a><div class="desc">Official bindings.</div></div>
+<div class="res"><div class="cat">MuJoCo</div><a href="https://github.com/google-deepmind/mujoco_menagerie" target="_blank">MuJoCo Menagerie</a><div class="desc">Robot models.</div></div>
+<div class="res"><div class="cat">RL</div><a href="https://spinningup.openai.com/en/latest" target="_blank">OpenAI Spinning Up</a><div class="desc">Deep RL from scratch.</div></div>
+<div class="res"><div class="cat">RL</div><a href="https://www.youtube.com/watch?v=MEt6rrxH8W4" target="_blank">PPO Implementation Details</a><div class="desc">11 core details.</div></div>
+<div class="res"><div class="cat">CUDA</div><a href="https://developer.nvidia.com/blog/even-easier-introduction-cuda" target="_blank">Intro to CUDA</a><div class="desc">First kernel in 30 min.</div></div>
+<div class="res"><div class="cat">CUDA</div><a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide" target="_blank">CUDA Programming Guide</a><div class="desc">Official reference.</div></div>
+<div class="res"><div class="cat">Sim2Real</div><a href="https://lilianweng.github.io/posts/2019-05-05-domain-randomization" target="_blank">Domain Randomization</a><div class="desc">Theory deep-dive.</div></div>
+<div class="res"><div class="cat">Sim2Real</div><a href="https://developer.nvidia.com/blog/closing-the-sim-to-real-gap-training-spot-quadruped-locomotion-with-nvidia-isaac-lab" target="_blank">NVIDIA Spot Sim2Real</a><div class="desc">Official case study.</div></div>
+<div class="res"><div class="cat">Humanoid</div><a href="https://www.figure.ai/news/reinforcement-learning-walking" target="_blank">Figure AI Humanoid Walk</a><div class="desc">Industry perspective.</div></div>
+<div class="res"><div class="cat">Jetson</div><a href="https://developer.nvidia.com/embedded/learn/tutorials" target="_blank">Jetson Tutorials</a><div class="desc">Hands-on Jetson.</div></div>
+<div class="res"><div class="cat">Jetson</div><a href="https://www.jetson-ai-lab.com/tutorials" target="_blank">Jetson AI Lab</a><div class="desc">Edge AI deployment.</div></div>
+<div class="res"><div class="cat">NVIDIA</div><a href="https://www.nvidia.com/en-us/training/self-paced-courses" target="_blank">NVIDIA DLI Free Courses</a><div class="desc">Self-paced certs.</div></div>
+<div class="res"><div class="cat">NVIDIA</div><a href="https://www.nvidia.com/en-us/about-nvidia/careers/university-recruiting" target="_blank">University Recruiting</a><div class="desc">Intern / Ignite / NCG.</div></div>
+<div class="res"><div class="cat">Interview</div><a href="https://igotanoffer.com/en/advice/nvidia-software-engineer-interview" target="_blank">NVIDIA Interview Guide</a><div class="desc">Process + sample Qs.</div></div>
+</div></div>
+</div>
+
+<!-- =========== PROJECTS =========== -->
+<div class="phase" id="p5">
+<div class="pcard"><h2>🚀 Project Portfolio</h2><p class="meta">Each project = GitHub repo + README + demo video. All map to JD keywords.</p>
+<div class="project"><b>P1 · ROS2 + Isaac Sim Mobile Robot</b> <span class="stack">[C++, ROS2, Isaac Sim, ros2_control, SQLite]</span><div style="margin-top:5px">URDF + diff_drive + PID velocity controller + Lidar, navigated in Isaac Sim. Logs path to SQLite. Covers C++, ROS2, Isaac Sim, control, databases.</div>
+<div class="chk" style="margin-top:5px"><input type="checkbox" data-id="pj1"><div>Repo + README + demo video published</div></div></div>
+<div class="project"><b>P2 · Quadruped Walking Policy (Isaac Lab)</b> <span class="stack">[Python, PyTorch, Isaac Lab, PPO, CUDA]</span><div style="margin-top:5px">Train a quadruped to walk with PPO in Isaac Lab. Export policy. Covers PyTorch, CUDA, Isaac Lab, RL.</div>
+<div class="chk" style="margin-top:5px"><input type="checkbox" data-id="pj2"><div>Repo + README + training curves + demo published</div></div></div>
+<div class="project"><b>P3 · Sim2Real Deployment on Jetson</b> <span class="stack">[Isaac ROS, TensorRT, Jetson, C++]</span><div style="margin-top:5px">Deploy a perception/inference model via Isaac ROS on Jetson with TensorRT. Benchmark latency. Covers Isaac ROS, Jetson, sim2real.</div>
+<div class="chk" style="margin-top:5px"><input type="checkbox" data-id="pj3"><div>Repo + README + benchmark + demo published</div></div></div>
+<div class="project"><b>P4 · Capstone — Humanoid/Quadruped Sim2Real Pipeline</b> <span class="stack">[Isaac Lab, Isaac ROS, Jetson, PyTorch, CUDA, C++, ROS2]</span><div style="margin-top:5px">End-to-end: train RL locomotion policy with domain randomization → export via TensorRT → deploy via Isaac ROS on Jetson. The single project that hits every JD keyword.</div>
+<div class="chk" style="margin-top:5px"><input type="checkbox" data-id="pj4"><div>Repo + architecture diagram + demo video + sim2real writeup published</div></div></div>
+</div>
+</div>
+
+<!-- =========== ROUTINE =========== -->
+<div class="phase" id="p6">
+<div class="pcard"><h2>⏰ Daily 4-Hour Routine (Every Weekday)</h2>
+<div class="routine">
+<b>60 min</b><div><b>Theory</b> — Watch the day's video / read the doc chapter. Take 1 page handwritten notes. Make Anki flashcards.</div>
+<b>90 min</b><div><b>Guided Coding</b> — Type along with the tutorial. Run the code. Debug errors. Commit to GitHub.</div>
+<b>60 min</b><div><b>Project Work</b> — Advance your current milestone project (P1→P4). At least 1 commit per day.</div>
+<b>30 min</b><div><b>Algorithms Drill</b> — Solve 1-2 NeetCode problems OR review yesterday's notes. This is your daily algorithms practice. Do NOT skip this.</div>
+</div></div>
+<div class="pcard"><h2>Weekly Rhythm</h2>
+<div class="routine">
+<b>Saturday</b><div><b>4 hours deep work</b> — Project integration, refactor, write README, record demo video, tag a release.</div>
+<b>Sunday</b><div><b>1-2 hours light</b> — Review the week. Update this dashboard. Plan next week. Read 1 NVIDIA Developer Blog post.</div>
+</div></div>
+<div class="pcard"><h2>Non-Negotiable Habits</h2>
+<div class="chk"><input type="checkbox" data-id="h1"><div>Commit to GitHub every single day — maintain a green-square streak</div></div>
+<div class="chk"><input type="checkbox" data-id="h2"><div>Read 1 NVIDIA Developer Blog post per week</div></div>
+<div class="chk"><input type="checkbox" data-id="h3"><div>Keep a learning log (markdown) — what clicked, what confused you</div></div>
+<div class="chk"><input type="checkbox" data-id="h4"><div>Update LinkedIn monthly with new skills/projects</div></div>
+<div class="chk"><input type="checkbox" data-id="h5"><div>Find ≥1 NVIDIA Isaac engineer on LinkedIn for a referral by Phase 3</div></div>
+<div class="chk"><input type="checkbox" data-id="h6"><div>Join NVIDIA Isaac forums + Isaac Lab Discord/GitHub Discussions</div></div>
+<div class="chk"><input type="checkbox" data-id="h7"><div>Solve 1 NeetCode problem every day for 196 days straight</div></div>
+</div>
+</div>
+
+<!-- =========== LEARNING PATH =========== -->
+<div class="phase" id="p7">
+<div class="pcard"><h2>🧠 The Learning Path Explained</h2>
+<p class="meta">Why each topic matters and how deep to go.</p>
+<div style="margin-top:12px">
+<h3 style="color:var(--nv2);font-size:.95rem;margin-bottom:8px">Programming & Systems</h3>
+<div class="chk"><input type="checkbox" data-id="lp1"><div><b>C++ (The Cherno)</b> — Go very deep. Isaac Sim/Lab are C++. You'll write robot controllers and ROS2 nodes in C++. Master pointers, references, RAII, templates, STL, memory management.</div></div>
+<div class="chk"><input type="checkbox" data-id="lp2"><div><b>Python</b> — Intermediate level. NumPy + PyTorch. You'll write RL training scripts and rapid prototypes. Not as deep as C++.</div></div>
+<div class="chk"><input type="checkbox" data-id="lp3"><div><b>Algorithms & DS (NeetCode)</b> — Daily practice for 6+ months. You need LeetCode Medium fluency. Focus on arrays, trees, graphs, DP. These show up in every technical interview.</div></div>
+<div class="chk"><input type="checkbox" data-id="lp4"><div><b>Computer Systems (CSAPP)</b> — Read chapters 1, 2, 3, 6. Understand memory hierarchy, cache, virtual memory, machine-level code. This is "system architecture" — how the hardware actually works.</div></div>
+<div class="chk"><input type="checkbox" data-id="lp5"><div><b>Databases</b> — Light coverage. SQL basics (SQLite). Time-series databases for robotics sensor logging. You won't be a DBA, but you need to log robot data.</div></div>
+<div class="chk"><input type="checkbox" data-id="lp6"><div><b>Memory Management</b> — Deep. Part of The Cherno C++. Stack vs heap, pointers, RAII, smart pointers, memory pools. Real-time robotics requires zero allocations in control loops.</div></div>
+</div>
+<div style="margin-top:16px">
+<h3 style="color:var(--nv2);font-size:.95rem;margin-bottom:8px">Robotics</h3>
+<div class="chk"><input type="checkbox" data-id="lp7"><div><b>ROS2</b> — Deep. The communication backbone for all Isaac ROS packages. Master nodes, topics, services, actions, TF2, URDF, launch files, ros2_control.</div></div>
+<div class="chk"><input type="checkbox" data-id="lp8"><div><b>Control Theory</b> — Working knowledge. PID for joint control (Steve Brunton). MPC for trajectory optimization. You don't need to derive proofs, but you need to implement and tune controllers.</div></div>
+<div class="chk"><input type="checkbox" data-id="lp9"><div><b>Kinematics</b> — Modern Robotics Course 1. Forward/inverse kinematics. Rotation matrices, SO(3), twists, wrenches. The math of robot motion.</div></div>
+<div class="chk"><input type="checkbox" data-id="lp10"><div><b>Simulators</b> — Deep. Isaac Sim (primary), MuJoCo (secondary). Understand physics engines, contact models, sensor simulation.</div></div>
+</div>
+<div style="margin-top:16px">
+<h3 style="color:var(--nv2);font-size:.95rem;margin-bottom:8px">AI/ML</h3>
+<div class="chk"><input type="checkbox" data-id="lp11"><div><b>PyTorch</b> — Intermediate. Official tutorials + learnpytorch.io. You'll write neural networks, training loops, custom datasets.</div></div>
+<div class="chk"><input type="checkbox" data-id="lp12"><div><b>Reinforcement Learning</b> — Deep. PPO specifically. Implement from scratch (Spinning Up). This is how you train robot locomotion policies.</div></div>
+<div class="chk"><input type="checkbox" data-id="lp13"><div><b>Computer Vision</b> — Working knowledge. CS231n lectures. CNNs, object detection. Needed for robot perception.</div></div>
+<div class="chk"><input type="checkbox" data-id="lp14"><div><b>CUDA</b> — Intermediate. Write your own kernels. Understand memory hierarchy, coalescing, shared memory. Isaac is GPU-accelerated; you need to understand why.</div></div>
+<div class="chk"><input type="checkbox" data-id="lp15"><div><b>Computer Graphics</b> — Working knowledge. LearnOpenGL + Ray Tracing in One Weekend. Understand the rendering pipeline. Helps you understand Isaac Sim internals.</div></div>
+</div>
+<div style="margin-top:16px">
+<h3 style="color:var(--nv2);font-size:.95rem;margin-bottom:8px">NVIDIA Stack</h3>
+<div class="chk"><input type="checkbox" data-id="lp16"><div><b>Isaac Sim</b> — Deep. The core simulator. All tutorials + build your own scenes.</div></div>
+<div class="chk"><input type="checkbox" data-id="lp17"><div><b>Isaac Lab</b> — Deep. The RL framework on top of Isaac Sim. Train all your policies here.</div></div>
+<div class="chk"><input type="checkbox" data-id="lp18"><div><b>Isaac ROS</b> — Deep. Production robot deployment packages. Run perception and navigation pipelines.</div></div>
+<div class="chk"><input type="checkbox" data-id="lp19"><div><b>Jetson</b> — Working knowledge. Edge deployment target. TensorRT optimization. You won't build custom hardware, but you need to deploy on it.</div></div>
+<div class="chk"><input type="checkbox" data-id="lp20"><div><b>Sim2Real</b> — Deep. THE key skill for this role. Domain randomization, system identification, policy deployment. Your capstone demonstrates this.</div></div>
+</div>
+</div>
+</div>
+
+<footer>
+Built for: NVIDIA Isaac Robotics Intern (JR2019641) · Isaac Applications Team · Target Q2 2027.<br>
+196 daily checkpoints · progress saved locally in your browser. Ready for GitHub Pages.
+</footer>
+
+<script>
+  // SMART COUNTDOWN
+  const planStart = new Date('2026-09-01T00:00:00Z');
+  const target = new Date('2027-04-01T00:00:00Z');
+  const now = new Date();
+  
+  if (now < planStart) {
+      const daysToStart = Math.max(0, Math.ceil((planStart - now) / (1000 * 60 * 60 * 24)));
+      document.getElementById('days').textContent = daysToStart;
+      document.getElementById('days-label').textContent = 'days until plan starts (Sep 1, 2026)';
+  } else {
+      const daysToTarget = Math.max(0, Math.ceil((target - now) / (1000 * 60 * 60 * 24)));
+      document.getElementById('days').textContent = daysToTarget;
+      document.getElementById('days-label').textContent = 'days until April 1, 2027 (application target)';
+  }
+
+  function showPhase(i){
+    document.querySelectorAll('.tab').forEach((t,idx)=>t.classList.toggle('active',idx===i));
+    document.querySelectorAll('.phase').forEach((p,idx)=>p.classList.toggle('active',idx===i));
+  }
+
+  const boxes = document.querySelectorAll('input[type=checkbox]');
+  boxes.forEach(b => {
+    const s = localStorage.getItem('master-'+b.dataset.id);
+    if(s==='1'){
+      b.checked=true;
+      b.closest('.chk').classList.add('done');
+    }
+    b.addEventListener('change',()=>{
+      localStorage.setItem('master-'+b.dataset.id, b.checked?'1':'0');
+      b.closest('.chk').classList.toggle('done', b.checked);
+      updateProgress();
+    });
+  });
+
+  function updateProgress(){
+    const total = boxes.length;
+    const done = [...boxes].filter(b => b.checked).length;
+    const pct = total ? Math.round(done/total*100) : 0;
+    document.getElementById('checked').textContent = done;
+    document.getElementById('pct').textContent = pct;
+    document.getElementById('bar').style.width = pct + '%';
+  }
+
+  function resetAll(){
+    if(!confirm('Reset ALL checkpoint progress?')) return;
+    boxes.forEach(b => {
+      localStorage.removeItem('master-'+b.dataset.id);
+      b.checked = false;
+      b.closest('.chk').classList.remove('done');
+    });
+    updateProgress();
+  }
+
+  updateProgress();
+</script>
+</body>
+</html>
