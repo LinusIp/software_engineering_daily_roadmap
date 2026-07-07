@@ -520,6 +520,17 @@ Built for: NVIDIA Isaac Robotics Intern (JR2019641) Â· Isaac Applications Team Â
 </footer>
 
 <script>
+
+  // --- YOUTUBE LINK FIXER ---
+  // Converts potentially hallucinated specific video IDs into guaranteed YouTube search links
+  // based on the exact title of the link.
+  document.querySelectorAll('a[href*="youtube.com/watch"]').forEach(link => {
+    const title = link.textContent.replace(/["']/g, "").trim(); // Get the text of the link
+    if (title && title !== "") {
+      // Replace the potentially broken URL with a YouTube search URL
+      link.href = "https://www.youtube.com/results?search_query=" + encodeURIComponent(title);
+    }
+  });
   // SMART COUNTDOWN
   const planStart = new Date('2026-09-01T00:00:00Z');
   const target = new Date('2027-04-01T00:00:00Z');
