@@ -74,18 +74,18 @@
 </div>
 
 <div class="legend">
-  <b>Strategy:</b> Desktop UI is handled by <b>C++17 + Dear ImGui + CMake</b>. Graphics rendering is handled by <b>Vulkan</b>. 
-  Your Fall 2026 University courses (Algorithms, Linear Algebra) replace the need to learn those from scratch here. 
-  Every Desktop skill learned is applied to building <b>Robot Control Interfaces</b> with embedded SQLite persistence and offline Local RAG.
+  <b>Strategy:</b> Pipeline flows from Systems/Graphics ➔ Hardware Compute (CUDA) ➔ Machine Learning/RL ➔ GenAI ➔ Edge Deployment. 
+  Desktop UI is handled by <b>C++17 + Dear ImGui + Vulkan</b> with local <b>SQLite</b> persistence built from Day 1. 
+  AI, RL models, and Isaac Sim tasks are treated as payloads that run inside this pristine architecture.
 </div>
 
 <div class="tabs">
-  <div class="tab active" onclick="showPhase(0)">🔵 Phase 1 · Core Systems & ImGui</div>
-  <div class="tab" onclick="showPhase(1)">🟣 Phase 2 · Vulkan & Deep Learning</div>
-  <div class="tab" onclick="showPhase(2)">🟠 Phase 3 · GenAI & RAG</div>
-  <div class="tab" onclick="showPhase(3)">🟢 Phase 4 · Desktop CAD, SQLite & Local Agent</div>
-  <div class="tab" onclick="showPhase(4)">🔴 Phase 5 · Isaac & Sim2Real</div>
-  <div class="tab" onclick="showPhase(5)">⚫ Phase 6 · Capstone</div>
+  <div class="tab active" onclick="showPhase(0)">🟩 Phase 1 · Core Arch & Graphics</div>
+  <div class="tab" onclick="showPhase(1)">🟩 Phase 2 · Compute Accel & DL</div>
+  <div class="tab" onclick="showPhase(2)">🟩 Phase 3 · RL & Simulation</div>
+  <div class="tab" onclick="showPhase(3)">🟩 Phase 4 · GenAI & Offline RAG</div>
+  <div class="tab" onclick="showPhase(4)">🟩 Phase 5 · Edge HW Deployment</div>
+  <div class="tab" onclick="showPhase(5)">🟩 Phase 6 · Capstone & Apply</div>
   <div class="tab" onclick="showPhase(6)">🚀 Projects</div>
   <div class="tab" onclick="showPhase(7)">⏰ Routine</div>
   <div class="tab" onclick="showPhase(8)">📚 Resources</div>
@@ -93,9 +93,9 @@
 
 <!-- =========== PHASE 1 =========== -->
 <div class="phase active" id="p0">
-<div class="pcard"><h2>🔵 Phase 1 — Core Systems, ROS2 & ImGui <i>(Sep–Oct 2026 · W1–W8)</i></h2>
-<p class="meta">Goal: Master C++ (The Cherno), ROS2 fundamentals, CMake, and Dear ImGui for Desktop Apps.</p>
-<span class="tag">C++17</span><span class="tag">ROS2</span><span class="tag">Dear ImGui</span><span class="tag">CMake</span></div>
+<div class="pcard"><h2>🟩 Phase 1 — Core Architecture & Graphics <i>(Sep–Oct 2026 · W1–W8)</i></h2>
+<p class="meta">Goal: Build your desktop shell first. Master C++, ROS2 basics, Dear ImGui, Vulkan, and local SQLite persistence. By the end of this phase, you have a dockable UI and 3D CAD canvas.</p>
+<span class="tag">C++17</span><span class="tag">Dear ImGui</span><span class="tag">Vulkan</span><span class="tag">SQLite</span><span class="tag">ROS2</span></div>
 
 <div class="week"><div class="wh">W1 · Sep 1–7 · C++ Foundations + CMake Toolchain</div>
 <div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w1d1"><div><b>D1</b> <a href="https://www.youtube.com/results?search_query=The+Cherno+Welcome+to+C%2B%2B" target="_blank">The Cherno: Welcome to C++</a> <span class="exp">(Install Ubuntu, VSCode, GCC, CMake. Write Hello World.)</span></div></div>
@@ -128,44 +128,44 @@
 </div>
 
 <div class="week"><div class="wh">W4 · Sep 22–28 · C++ Polymorphism + ROS2 Packages</div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w4d1"><div><b>D1</b> <a href="https://www.youtube.com/results?search_query=The+Cherno+Virtual+Functions" target="_blank">The Cherno: Virtual Functions</a> + <a href="https://csapp.cs.cmu.edu/" target="_blank">CSAPP Ch.2</a> <span class="exp">(Runtime polymorphism and machine-level representation.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w4d1"><div><b>D1</b> <a href="https://www.youtube.com/results?search_query=The+Cherno+Virtual+Functions" target="_blank">The Cherno: Virtual Functions</a> <span class="exp">(Runtime polymorphism.)</span></div></div>
 <div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w4d2"><div><b>D2</b> <a href="https://docs.ros.org/en/humble/Tutorials.html" target="_blank">ROS2 Official: Creating a C++ Package</a> <span class="exp">(CMakeLists.txt, package.xml.)</span></div></div>
 <div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w4d3"><div><b>D3</b> <a href="https://docs.ros.org/en/humble/Tutorials.html" target="_blank">ROS2 Official: Launch Files</a> <span class="exp">(Launch multiple nodes simultaneously.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w4d4"><div><b>D4</b> <a href="https://www.youtube.com/results?search_query=The+Cherno+Arrays+and+Strings" target="_blank">The Cherno: Arrays & Strings</a> + <a href="https://csapp.cs.cmu.edu/" target="_blank">CSAPP Ch.3</a> <span class="exp">(Memory buffers and assembly basics.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w4d4"><div><b>D4</b> <a href="https://www.youtube.com/results?search_query=The+Cherno+Arrays+and+Strings" target="_blank">The Cherno: Arrays & Strings</a> <span class="exp">(Memory buffers and assembly basics.)</span></div></div>
 <div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w4d5"><div><b>D5</b> Write ROS2 multi-node launch file <span class="exp">(Create a complex launch file with parameters.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w4d6"><div><b>D6</b> <a href="https://docs.ros.org/en/humble/Tutorials.html" target="_blank">ROS2 Official: TF2 Tutorials</a> <span class="exp">(Coordinate frame transformations.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w4d7"><div><b>D7</b> <a href="https://docs.ros.org/en/humble/Tutorials.html" target="_blank">ROS2 Official: URDF Tutorials</a> <span class="exp">(Define robot physical structure in XML.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w4d8"><div><b>D8</b> <a href="https://docs.ros.org/en/humble/Tutorials/Advanced/Topic-Statistics/Tutorial.html" target="_blank">ROS2 QoS & Lifecycle Nodes</a> <span class="exp">(Crucial for reliable video streaming and safe robot boot sequences.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w4d6"><div><b>D6</b> <a href="https://docs.ros.org/en/humble/Tutorials.html" target="_blank">ROS2 Official: TF2 & URDF Tutorials</a> <span class="exp">(Coordinate frames and defining robot physical structure in XML.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w4d7"><div><b>D7</b> <a href="https://docs.ros.org/en/humble/Tutorials/Advanced/Topic-Statistics/Tutorial.html" target="_blank">ROS2 QoS & Lifecycle Nodes</a> <span class="exp">(Crucial for reliable video streaming and safe robot boot sequences.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w4d8"><div><b>D8</b> ROS2 Math & Nav2 Basics <span class="exp">(Review 3Blue1Brown Linear Algebra and ROS2 Nav2 stack fundamentals.)</span></div></div>
 </div>
 
-<div class="week"><div class="wh">W5 · Sep 29–Oct 5 · ROS2 Math & Nav2 (Sync with Uni MATH201)</div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w5d1"><div><b>D1</b> <a href="https://www.youtube.com/results?search_query=3Blue1Brown+Vectors+Linear+Algebra" target="_blank">3Blue1Brown: Linear Algebra Ch.1-3</a> <span class="exp">(Review for Uni MATH201)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w5d2"><div><b>D2</b> <a href="https://www.youtube.com/results?search_query=3Blue1Brown+Matrix+Multiplication" target="_blank">3Blue1Brown: Ch.4-5</a> <span class="exp">(Matrix multiplication and determinants.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w5d3"><div><b>D3</b> <a href="https://www.youtube.com/results?search_query=3Blue1Brown+Inverse+Dot+Cross+Product" target="_blank">3Blue1Brown: Ch.6-7</a> <span class="exp">(Dot products and cross products for 3D geometry.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w5d4"><div><b>D4</b> Write URDF for 2-wheel robot <span class="exp">(Define joints, links, and collision properties.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w5d5"><div><b>D5</b> Publish TF tree in ROS2 <span class="exp">(Broadcast the coordinate frames of your robot parts.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w5d6"><div><b>D6</b> <a href="https://www.youtube.com/results?search_query=ROS2+Nav2+Crash+Course" target="_blank">ROS2 Nav2 Crash Course (Part 1)</a> <span class="exp">(Autonomous navigation stack basics.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w5d7"><div><b>D7</b> <a href="https://www.youtube.com/results?search_query=ROS2+Nav2+SLAM+Crash+Course" target="_blank">Nav2 Crash Course (Part 2, SLAM)</a> <span class="exp">(Simultaneous Localization and Mapping.)</span></div></div>
+<div class="week"><div class="wh">W5 · Sep 29–Oct 5 · Modern Robotics & Control</div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w5d1"><div><b>D1</b> <a href="https://www.youtube.com/results?search_query=Kevin+Lynch+Modern+Robotics+Configuration+Space" target="_blank">Modern Robotics: C-space & DoF</a> <span class="exp">(Degrees of freedom and robot kinematics.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w5d2"><div><b>D2</b> <a href="https://www.youtube.com/results?search_query=Kevin+Lynch+Modern+Robotics+Holonomic" target="_blank">Modern Robotics: Holonomic vs Nonholonomic</a> <span class="exp">(Motion constraints of wheeled robots.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w5d3"><div><b>D3</b> <a href="https://www.youtube.com/results?search_query=Kevin+Lynch+Modern+Robotics+Rigid+Body+Motion" target="_blank">Modern Robotics: Rigid-body motion, SO(3)</a> <span class="exp">(3D rotation matrices and SO(3) group.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w5d4"><div><b>D4</b> <a href="https://www.youtube.com/results?search_query=Kevin+Lynch+Modern+Robotics+Twists+Wrenches" target="_blank">Modern Robotics: Twists & Wrenches</a> <span class="exp">(Velocities and forces in 3D space.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w5d5"><div><b>D5</b> <a href="https://www.youtube.com/results?search_query=Steve+Brunton+Control+Bootcamp+PID" target="_blank">Steve Brunton: Control Bootcamp (PID)</a> <span class="exp">(Proportional-Integral-Derivative control loop.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w5d6"><div><b>D6</b> <a href="https://www.youtube.com/results?search_query=Articulated+Robotics+ros2_control+Concepts" target="_blank">Articulated Robotics: ros2_control Concepts</a> <span class="exp">(Standardized robot hardware abstraction.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w5d7"><div><b>D7</b> Implement ros2_control diff_drive controller <span class="exp">(Configure the controller to translate cmd_vel to wheel velocities.)</span></div></div>
 </div>
 
-<div class="week"><div class="wh">W6 · Oct 6–12 · Modern Robotics & Control</div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w6d1"><div><b>D1</b> <a href="https://www.youtube.com/results?search_query=Kevin+Lynch+Modern+Robotics+Configuration+Space" target="_blank">Modern Robotics: C-space & DoF</a> <span class="exp">(Degrees of freedom and robot kinematics.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w6d2"><div><b>D2</b> <a href="https://www.youtube.com/results?search_query=Kevin+Lynch+Modern+Robotics+Holonomic" target="_blank">Modern Robotics: Holonomic vs Nonholonomic</a> <span class="exp">(Motion constraints of wheeled robots.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w6d3"><div><b>D3</b> <a href="https://www.youtube.com/results?search_query=Kevin+Lynch+Modern+Robotics+Rigid+Body+Motion" target="_blank">Modern Robotics: Rigid-body motion, SO(3)</a> <span class="exp">(3D rotation matrices and SO(3) group.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w6d4"><div><b>D4</b> <a href="https://www.youtube.com/results?search_query=Kevin+Lynch+Modern+Robotics+Twists+Wrenches" target="_blank">Modern Robotics: Twists & Wrenches</a> <span class="exp">(Velocities and forces in 3D space.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w6d5"><div><b>D5</b> <a href="https://www.youtube.com/results?search_query=Steve+Brunton+Control+Bootcamp+PID" target="_blank">Steve Brunton: Control Bootcamp (PID)</a> <span class="exp">(Proportional-Integral-Derivative control loop.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w6d6"><div><b>D6</b> <a href="https://www.youtube.com/results?search_query=Articulated+Robotics+ros2_control+Concepts" target="_blank">Articulated Robotics: ros2_control Concepts</a> <span class="exp">(Standardized robot hardware abstraction.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w6d7"><div><b>D7</b> Implement ros2_control diff_drive controller <span class="exp">(Configure the controller to translate cmd_vel to wheel velocities.)</span></div></div>
+<div class="week"><div class="wh">W6 · Oct 6–12 · Dear ImGui Foundations & Vulkan Setup</div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w6d1"><div><b>D1</b> <a href="https://www.youtube.com/results?search_query=Dear+ImGui+Setup+First+App" target="_blank">Dear ImGui: Setup & First App</a> <span class="exp">(Install Dear ImGui, configure CMakeLists.txt for ImGui + GLFW.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w6d2"><div><b>D2</b> <a href="https://www.youtube.com/results?search_query=Dear+ImGui+Docking+Branch+tutorial" target="_blank">Dear ImGui: Docking Branch</a> <span class="exp">(Understand the docking branch. We will use it for desktop robotics UI.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w6d3"><div><b>D3</b> <a href="https://vulkan-tutorial.com/Overview" target="_blank">Vulkan Tutorial: Overview & Instance</a> <span class="exp">(Understand why Vulkan is faster but more verbose than OpenGL.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w6d4"><div><b>D4</b> <a href="https://vulkan-tutorial.com/Drawing_a_triangle/Setup/Base_code" target="_blank">Vulkan Tutorial: Presentation & Swap Chain</a> <span class="exp">(Handle window surfaces and frame buffering.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w6d5"><div><b>D5</b> <a href="https://vulkan-tutorial.com/Drawing_a_triangle/Graphics_pipeline_basics" target="_blank">Vulkan Tutorial: Graphics Pipeline</a> <span class="exp">(Shaders, vertex input, rasterizer.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w6d6"><div><b>D6</b> <a href="https://vulkan-tutorial.com/Drawing_a_triangle/Drawing" target="_blank">Vulkan Tutorial: Drawing a Triangle</a> <span class="exp">(Render your first frame in Vulkan!)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w6d7"><div><b>D7</b> Integrate Vulkan into Dear ImGui <span class="exp">(Embed Vulkan render window inside ImGui using ImGui_ImplVulkan.)</span></div></div>
 </div>
 
-<div class="week"><div class="wh">W7 · Oct 13–19 · Dear ImGui Foundations & CMake Integration</div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w7d1"><div><b>D1</b> <a href="https://www.youtube.com/results?search_query=Dear+ImGui+Setup+First+App" target="_blank">Dear ImGui: Setup & First App</a> <span class="exp">(Install Dear ImGui, configure CMakeLists.txt for ImGui + GLFW.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w7d2"><div><b>D2</b> <a href="https://www.youtube.com/results?search_query=Dear+ImGui+Docking+Branch+tutorial" target="_blank">Dear ImGui: Docking Branch</a> <span class="exp">(Understand the docking branch. We will use it for desktop robotics UI.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w7d3"><div><b>D3</b> <a href="https://www.youtube.com/results?search_query=Dear+ImGui+state+and+event+handling" target="_blank">Dear ImGui: State & Event Handling</a> <span class="exp">(The core event-driven mechanism in ImGui.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w7d4"><div><b>D4</b> <a href="https://www.youtube.com/results?search_query=Articulated+Robotics+Isaac+Sim+in+30+minutes" target="_blank">Articulated Robotics: Isaac Sim in 30 min</a> <span class="exp">(Quick start with NVIDIA's robotics simulator.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w7d5"><div><b>D5</b> <a href="https://docs.isaacsim.omniverse.nvidia.com/4.5.0/introduction/quickstart_index.html" target="_blank">Isaac Sim Quickstart (GUI)</a> <span class="exp">(Navigate the UI and spawn basic objects.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w7d6"><div><b>D6</b> Spawn robot in Isaac Sim <span class="exp">(Load your URDF into Isaac Sim and verify physics.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w7d7"><div><b>D7</b> Integrate URDF + ros2_control + Isaac Sim <span class="exp">(Bridge Isaac Sim physics with ROS2 controls.)</span></div></div>
+<div class="week"><div class="wh">W7 · Oct 13–19 · SQLite Persistence & Advanced CAD Viewport</div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w7d1"><div><b>D1</b> <a href="https://www.youtube.com/results?search_query=SQLite+C%2B%2B+wrapper+tutorial" target="_blank">SQLite C++ Wrapper Integration</a> <span class="exp">(Learn how to embed SQLite into your ImGui app using a modern C++ wrapper.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w7d2"><div><b>D2</b> Design schema for 3D CAD/physics scenes <span class="exp">(Define tables for objects, transforms, hierarchies, and physics properties.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w7d3"><div><b>D3</b> Implement Save/Load scene logic <span class="exp">(Write C++ logic to serialize your 3D workspace state to the SQLite database.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w7d4"><div><b>D4</b> Build custom 3D manipulation gizmos <span class="exp">(Spend the day implementing custom translation/rotation arrows for your 3D CAD canvas.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w7d5"><div><b>D5</b> Implement dockable layouts & custom shaders <span class="exp">(Build a robust, dockable CAD layout using Dear ImGui, and custom Vulkan shaders for grid rendering.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w7d6"><div><b>D6</b> Read articles on connecting Vulkan with ImGui <span class="exp">(Deep-dive into articles explaining ImGui_ImplVulkan render pass integration and framebuffer management.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w7d7"><div><b>D7</b> Async database transactions <span class="exp">(Run heavy SQLite writes in background threads to ensure the Vulkan UI never stutters.)</span></div></div>
 </div>
 
 <div class="week"><div class="wh">W8 · Oct 20–26 · Project 1 — ROS2 Mobile Robot with ImGui Telemetry</div>
@@ -174,248 +174,229 @@
 <div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w8d3"><div><b>D3</b> Sensor integration (Lidar/camera) <span class="exp">(Add simulated sensors and echo their data in ROS2.)</span></div></div>
 <div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w8d4"><div><b>D4</b> Build Dear ImGui dashboard to display robot sensors <span class="exp">(Create a GUI showing sensor readouts and speed.)</span></div></div>
 <div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w8d5"><div><b>D5</b> Connect Dear ImGui event handlers to ROS2 topics via C++ <span class="exp">(Thread-safe UI updates from ROS2 subscriptions.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w8d6"><div><b>D6</b> Record demo video + README <span class="exp">(Record a 2-min demo and write documentation.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w8d7"><div><b>D7</b> Publish repo <b>ros2-isaac-imgui-robot</b> <span class="exp">(Push the final code to GitHub.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w8d8"><div><b>D8</b> <a href="https://google.github.io/googletest/primer.html" target="_blank">GoogleTest + CMake Integration</a> <span class="exp">(Write 1 unit test for your PID controller. Run via colcon test. Setup GitHub Actions CI.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w8d6"><div><b>D6</b> Integrate SQLite to save workspace configurations <span class="exp">(Allow the user to save and load robot states and PID configurations locally.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w8d7"><div><b>D7</b> Record demo video + README <span class="exp">(Record a 2-min demo and write documentation.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w8d8"><div><b>D8</b> Publish repo <b>ros2-isaac-imgui-vulkan-robot</b> <span class="exp">(Push the final code to GitHub, including SQLite persistence and GoogleTest CI.)</span></div></div>
 </div>
 </div>
 
 <!-- =========== PHASE 2 =========== -->
 <div class="phase" id="p1">
-<div class="pcard"><h2>🟣 Phase 2 — Vulkan Graphics & Deep Learning <i>(Nov–Dec 2026 · W9–W14)</i></h2>
-<p class="meta">Goal: Master Vulkan for high-performance rendering, Deep Learning (CS231n), PyTorch, CUDA.</p>
-<span class="tag">Vulkan</span><span class="tag">Deep Learning</span><span class="tag">PyTorch</span><span class="tag">CUDA</span></div>
+<div class="pcard"><h2>🟩 Phase 2 — Compute Acceleration & Deep Learning <i>(Nov–Dec 2026 · W9–W13)</i></h2>
+<p class="meta">Goal: Standard Deep Learning, PyTorch, and CUDA foundations. You must understand how memory flows between CPU and GPU before touching RL or TensorRT.</p>
+<span class="tag">CS231n</span><span class="tag">PyTorch</span><span class="tag">CUDA</span><span class="tag">Docker</span></div>
 
-<div class="week"><div class="wh">W9 · Nov 2–8 · Isaac Sim Deep Dive + Vulkan Foundations</div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w9d1"><div><b>D1</b> <a href="https://docs.isaacsim.omniverse.nvidia.com/4.5.0/introduction/quickstart_index.html" target="_blank">Isaac Sim: Quickstart with a Robot</a> <span class="exp">(Spawn Turtlebot or custom robot and explore environments.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w9d2"><div><b>D2</b> <a href="https://docs.isaacsim.omniverse.nvidia.com/4.5.0/introduction/quickstart_index.html" target="_blank">Isaac Sim: Build a Robot in GUI</a> <span class="exp">(Use the GUI to build a simple environment with obstacles.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w9d3"><div><b>D3</b> <a href="https://vulkan-tutorial.com/Overview" target="_blank">Vulkan Tutorial: Overview & Instance</a> <span class="exp">(Understand why Vulkan is faster but more verbose than OpenGL.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w9d4"><div><b>D4</b> <a href="https://vulkan-tutorial.com/Drawing_a_triangle/Setup/Base_code" target="_blank">Vulkan Tutorial: Presentation & Swap Chain</a> <span class="exp">(Handle window surfaces and frame buffering.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w9d5"><div><b>D5</b> <a href="https://vulkan-tutorial.com/Drawing_a_triangle/Graphics_pipeline_basics" target="_blank">Vulkan Tutorial: Graphics Pipeline</a> <span class="exp">(Shaders, vertex input, rasterizer.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w9d6"><div><b>D6</b> <a href="https://vulkan-tutorial.com/Drawing_a_triangle/Drawing" target="_blank">Vulkan Tutorial: Drawing a Triangle</a> <span class="exp">(Render your first frame in Vulkan!)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w9d7"><div><b>D7</b> <a href="https://www.youtube.com/results?search_query=Brendan+Galea+Vulkan+Game+Engine+1" target="_blank">Brendan Galea: Vulkan Game Engine (Part 1)</a> <span class="exp">(Start building a proper, reusable Vulkan architecture.)</span></div></div>
+<div class="week"><div class="wh">W9 · Nov 2–8 · Deep Learning Foundations (CS231n)</div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w9d1"><div><b>D1</b> <a href="https://www.youtube.com/results?search_query=Stanford+CS231n+Lecture+1+Computer+Vision" target="_blank">CS231n: Lecture 1 (CV History)</a> <span class="exp">(Understand the evolution of computer vision.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w9d2"><div><b>D2</b> <a href="https://www.youtube.com/results?search_query=Stanford+CS231n+Lecture+2+Image+Classification" target="_blank">CS231n: Lecture 2 (Image Class.)</a> <span class="exp">(K-Nearest Neighbors and linear classification.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w9d3"><div><b>D3</b> <a href="https://www.youtube.com/results?search_query=Stanford+CS231n+Lecture+3+Loss+Optimization" target="_blank">CS231n: Lecture 3 (Loss & Opt)</a> <span class="exp">(SVM/Softmax loss functions and gradient descent.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w9d4"><div><b>D4</b> <a href="https://www.youtube.com/results?search_query=Stanford+CS231n+Lecture+4+Backpropagation" target="_blank">CS231n: Lecture 4 (Backprop)</a> <span class="exp">(Chain rule and computational graphs.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w9d5"><div><b>D5</b> <a href="https://docs.pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html" target="_blank">PyTorch 60-Min Blitz</a> <span class="exp">(Tensors, autograd, and basic neural networks.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w9d6"><div><b>D6</b> <a href="https://www.youtube.com/results?search_query=Stanford+CS231n+Lecture+5+CNNs" target="_blank">CS231n: Lecture 5 (CNNs)</a> <span class="exp">(Convolutions, pooling, and feature hierarchies.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w9d7"><div><b>D7</b> <a href="https://www.youtube.com/results?search_query=Stanford+CS231n+Lecture+6+Training+CNNs" target="_blank">CS231n: Lecture 6 (Training)</a> <span class="exp">(Regularization, dropout, and batch norm.)</span></div></div>
 </div>
 
-<div class="week"><div class="wh">W10 · Nov 9–15 · Deep Learning Foundations (CS231n)</div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w10d1"><div><b>D1</b> <a href="https://www.youtube.com/results?search_query=Stanford+CS231n+Lecture+1+Computer+Vision" target="_blank">CS231n: Lecture 1 (CV History)</a> <span class="exp">(Understand the evolution of computer vision.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w10d2"><div><b>D2</b> <a href="https://docs.pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html" target="_blank">PyTorch 60-Min Blitz</a> <span class="exp">(Tensors, autograd, and basic neural networks.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w10d3"><div><b>D3</b> <a href="https://www.youtube.com/results?search_query=Stanford+CS231n+Lecture+2+Image+Classification" target="_blank">CS231n: Lecture 2 (Image Class.)</a> <span class="exp">(K-Nearest Neighbors and linear classification.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w10d4"><div><b>D4</b> <a href="https://www.youtube.com/results?search_query=Stanford+CS231n+Lecture+3+Loss+Optimization" target="_blank">CS231n: Lecture 3 (Loss & Opt)</a> <span class="exp">(SVM/Softmax loss functions and gradient descent.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w10d5"><div><b>D5</b> <a href="https://www.youtube.com/results?search_query=Stanford+CS231n+Lecture+4+Backpropagation" target="_blank">CS231n: Lecture 4 (Backprop)</a> <span class="exp">(Chain rule and computational graphs.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w10d6"><div><b>D6</b> <a href="https://www.youtube.com/results?search_query=Stanford+CS231n+Lecture+5+CNNs" target="_blank">CS231n: Lecture 5 (CNNs)</a> <span class="exp">(Convolutions, pooling, and feature hierarchies.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w10d7"><div><b>D7</b> <a href="https://www.youtube.com/results?search_query=Stanford+CS231n+Lecture+6+Training+CNNs" target="_blank">CS231n: Lecture 6 (Training)</a> <span class="exp">(Regularization, dropout, and batch norm.)</span></div></div>
+<div class="week"><div class="wh">W10 · Nov 9–15 · PyTorch & CUDA Programming Basics</div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w10d1"><div><b>D1</b> <a href="https://developer.nvidia.com/blog/even-easier-introduction-cuda" target="_blank">NVIDIA: Intro to CUDA</a> <span class="exp">(Host vs Device code, kernels, and threads.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w10d2"><div><b>D2</b> Write vector-add kernel + profile with Nsight <span class="exp">(Write your first CUDA kernel to add two arrays and profile it.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w10d3"><div><b>D3</b> <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide" target="_blank">CUDA Programming Guide</a> <span class="exp">(Read about memory hierarchies: shared, global, local.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w10d4"><div><b>D4</b> <a href="https://www.youtube.com/results?search_query=CUDA+Programming+Course+Part+1" target="_blank">CUDA Programming Course</a> <span class="exp">(Grids, blocks, and warps.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w10d5"><div><b>D5</b> Naive matrix-mul kernel <span class="exp">(Implement matrix multiplication and measure performance.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w10d6"><div><b>D6</b> <a href="https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html" target="_blank">CUDA Best Practices</a> <span class="exp">(Memory coalescing and avoiding bank conflicts.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w10d7"><div><b>D7</b> Tiled matrix-mul <span class="exp">(Optimize the matrix multiplication using shared memory tiling.)</span></div></div>
 </div>
 
-<div class="week"><div class="wh">W11 · Nov 16–22 · Isaac Lab Setup + RL Fundamentals</div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w11d1"><div><b>D1</b> <a href="https://isaac-sim.github.io/IsaacLab/main/source/setup/quickstart.html" target="_blank">Isaac Lab Quickstart (install)</a> <span class="exp">(Set up the RL framework built on top of Isaac Sim.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w11d2"><div><b>D2</b> <a href="https://isaac-sim.github.io/IsaacLab/main/source/tutorials/index.html" target="_blank">Isaac Lab Tutorial 1-2</a> <span class="exp">(Navigate the environment and task structure.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w11d3"><div><b>D3</b> <a href="https://isaac-sim.github.io/IsaacLab/main/source/tutorials/index.html" target="_blank">Isaac Lab Tutorial 3</a> <span class="exp">(Understand reward functions and terminations.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w11d4"><div><b>D4</b> <a href="https://www.youtube.com/results?search_query=Isaac+Lab+Office+Hours+RL+Fundamentals" target="_blank">Isaac Lab: RL Fundamentals</a> <span class="exp">(Markov Decision Processes and policy gradients.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w11d5"><div><b>D5</b> Run existing Isaac Lab cartpole env <span class="exp">(Clone Isaac Lab and run the built-in cartpole example.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w11d6"><div><b>D6</b> <a href="https://isaac-sim.github.io/IsaacLab/main/source/tutorials/03_envs/run_rl_training.html" target="_blank">Isaac Lab RL Training (SB3)</a> <span class="exp">(Use Stable Baselines3 to train a basic task.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w11d7"><div><b>D7</b> Train cartpole + modify reward <span class="exp">(Change the reward function and observe changes in behavior.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w11d8"><div><b>D8</b> <a href="https://docs.docker.com/get-started/" target="_blank">Docker & NVIDIA Container Toolkit</a> <span class="exp">(Learn to run Isaac Sim/Lab inside NGC Docker containers. Mandatory for NVIDIA dev.)</span></div></div>
+<div class="week"><div class="wh">W11 · Nov 16–22 · Docker & Isaac Sim Deep Dive</div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w11d1"><div><b>D1</b> <a href="https://docs.docker.com/get-started/" target="_blank">Docker & NVIDIA Container Toolkit</a> <span class="exp">(Learn to run Isaac Sim/Lab inside NGC Docker containers. Mandatory for NVIDIA dev.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w11d2"><div><b>D2</b> <a href="https://docs.isaacsim.omniverse.nvidia.com/4.5.0/introduction/quickstart_index.html" target="_blank">Isaac Sim: Quickstart with a Robot</a> <span class="exp">(Spawn Turtlebot or custom robot and explore environments.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w11d3"><div><b>D3</b> <a href="https://docs.isaacsim.omniverse.nvidia.com/4.5.0/introduction/quickstart_index.html" target="_blank">Isaac Sim: Build a Robot in GUI</a> <span class="exp">(Use the GUI to build a simple environment with obstacles.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w11d4"><div><b>D4</b> Spawn robot in Isaac Sim <span class="exp">(Load your URDF into Isaac Sim and verify physics.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w11d5"><div><b>D5</b> Integrate URDF + ros2_control + Isaac Sim <span class="exp">(Bridge Isaac Sim physics with ROS2 controls.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w11d6"><div><b>D6</b> <a href="https://www.youtube.com/results?search_query=Brendan+Galea+Vulkan+Game+Engine+1" target="_blank">Brendan Galea: Vulkan Game Engine (Part 1)</a> <span class="exp">(Start building a proper, reusable Vulkan architecture.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w11d7"><div><b>D7</b> System Architecture Review <span class="exp">(Read CSAPP Ch.2-3 for machine-level representation and memory hierarchy.)</span></div></div>
 </div>
 
-<div class="week"><div class="wh">W12 · Nov 23–29 · PyTorch RL + PPO From Scratch</div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w12d1"><div><b>D1</b> <a href="https://spinningup.openai.com/en/latest/spinningup/rl_intro.html" target="_blank">Spinning Up RL Part 1</a> <span class="exp">(Core concepts of RL: states, actions, rewards.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w12d2"><div><b>D2</b> <a href="https://spinningup.openai.com/en/latest/spinningup/rl_intro2.html" target="_blank">Spinning Up Part 2</a> <span class="exp">(Bellman equations and Q-learning.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w12d3"><div><b>D3</b> <a href="https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html" target="_blank">Spinning Up Part 3 (PPO)</a> <span class="exp">(Proximal Policy Optimization theory.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w12d4"><div><b>D4</b> <a href="https://www.youtube.com/results?search_query=PPO+Implementation+Details+PyTorch" target="_blank">PPO Implementation Details</a> <span class="exp">(Clipping, advantage estimation, and entropy.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w12d5"><div><b>D5</b> <a href="https://www.youtube.com/results?search_query=PPO+with+PyTorch+Machine+Learning+with+Phil" target="_blank">PPO with PyTorch</a> <span class="exp">(Step-by-step coding of PPO.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w12d6"><div><b>D6</b> <a href="https://docs.pytorch.org/tutorials/intermediate/reinforcement_ppo.html" target="_blank">TorchRL PPO Tutorial</a> <span class="exp">(Using PyTorch's native RL library.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w12d7"><div><b>D7</b> Minimal PPO on CartPole <span class="exp">(Implement a clean, minimal PPO algorithm from scratch in PyTorch.)</span></div></div>
-</div>
-
-<div class="week"><div class="wh">W13 · Dec 7–13 · CUDA Programming + System Architecture</div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w13d1"><div><b>D1</b> <a href="https://developer.nvidia.com/blog/even-easier-introduction-cuda" target="_blank">NVIDIA: Intro to CUDA</a> <span class="exp">(Host vs Device code, kernels, and threads.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w13d2"><div><b>D2</b> Write vector-add kernel + profile with Nsight <span class="exp">(Write your first CUDA kernel to add two arrays and profile it.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w13d3"><div><b>D3</b> <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide" target="_blank">CUDA Programming Guide</a> <span class="exp">(Read about memory hierarchies: shared, global, local.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w13d4"><div><b>D4</b> <a href="https://www.youtube.com/results?search_query=CUDA+Programming+Course+Part+1" target="_blank">CUDA Programming Course</a> <span class="exp">(Grids, blocks, and warps.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w13d5"><div><b>D5</b> Naive matrix-mul kernel <span class="exp">(Implement matrix multiplication and measure performance.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w13d6"><div><b>D6</b> <a href="https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html" target="_blank">CUDA Best Practices</a> <span class="exp">(Memory coalescing and avoiding bank conflicts.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w13d7"><div><b>D7</b> Tiled matrix-mul <span class="exp">(Optimize the matrix multiplication using shared memory tiling.)</span></div></div>
-</div>
-
-<div class="week"><div class="wh">W14 · Dec 14–20 · Project 2 — Quadruped Walk & CAD Viewport</div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w14d1"><div><b>D1</b> <a href="https://www.youtube.com/results?search_query=Train+Custom+Quadruped+to+Walk+Isaac+Lab" target="_blank">Train Custom Quadruped to Walk</a> <span class="exp">(Overview of the Spot/Anymal training process.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w14d2"><div><b>D2</b> Set up robot + scene in Isaac Lab <span class="exp">(Import the URDF and configure terrain.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w14d3"><div><b>D3</b> Reward + observation design <span class="exp">(Define what the robot sees and how it's penalized/rewarded.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w14d4"><div><b>D4</b> Train to convergence <span class="exp">(Run the PPO training loop until the robot walks.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w14d5"><div><b>D5</b> Export policy (ONNX/PT) <span class="exp">(Save the trained neural network for deployment.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w14d6"><div><b>D6</b> Demo video + README <span class="exp">(Record training curves and walking behavior.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w14d7"><div><b>D7</b> Publish <b>isaac-lab-quadruped-walk</b> <span class="exp">(Push to GitHub.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w14d8"><div><b>D8</b> <a href="https://github.com/ocornut/imgui/wiki/Image-Loading-and-Displaying-Examples" target="_blank">Dear ImGui + Vulkan Integration (AutoCAD-style Viewport)</a> <span class="exp">(Embed a Vulkan render window inside Dear ImGui using ImGui_ImplVulkan. Implement mouse-picking (ray-casting) to select 3D objects, and build basic 3D translate/rotate gizmos. This is how AutoCAD/Fusion360 UIs are built.)</span></div></div>
+<div class="week"><div class="wh">W12 · Nov 23–29 · Capstone Architecture & Scaffolding</div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w12d1"><div><b>D1</b> Capstone architecture design <span class="exp">(Design the architecture diagram mapping ImGui/Vulkan frontend to ROS2/CUDA backend.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w12d2"><div><b>D2</b> Project scaffold <span class="exp">(Create the initial Git repo and folder structure for your capstone.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w12d3"><div><b>D3</b> Setup GoogleTest + CMake Integration <span class="exp">(Setup GitHub Actions CI to run tests on every push.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w12d4"><div><b>D4</b> Define ROS2 Message Interfaces <span class="exp">(Create custom .msg and .srv files for your robot commands.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w12d5"><div><b>D5</b> Implement basic BehaviorTree.CPP scaffold <span class="exp">(Setup the basic tree structure that will later be populated by LLM commands.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w12d6"><div><b>D6</b> Optimize ImGui Render Loop <span class="exp">(Ensure dockable UI and Vulkan canvas run at high FPS without blocking ROS2 spin.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w12d7"><div><b>D7</b> Week 12 Review & Buffer <span class="exp">(Catch up on any missed concepts. Solidify C++ memory management.)</span></div></div>
 </div>
 </div>
 
 <!-- =========== PHASE 3 =========== -->
 <div class="phase" id="p2">
-<div class="pcard"><h2>🟠 Phase 3 — GenAI, RAG & Fine-Tuning <i>(Jan 2027 · W15–W18)</i></h2>
-<p class="meta">Goal: Learn LLMs, RAG, and Fine-tuning to give robots a "brain".</p>
-<span class="tag">LLMs</span><span class="tag">RAG</span><span class="tag">Fine-Tuning</span></div>
+<div class="pcard"><h2>🟩 Phase 3 — Reinforcement Learning & Simulation <i>(Dec 2026 - Feb 2027 · W13–W19)</i></h2>
+<p class="meta">Goal: Leverage Isaac Lab’s massively parallel GPU-accelerated environments. Master PPO and Sim2Real techniques to train quadruped/humanoid policies.</p>
+<span class="tag">Isaac Lab</span><span class="tag">PPO</span><span class="tag">Sim2Real</span></div>
 
-<div class="week"><div class="wh">W15 · Jan 4–10 · LLM Foundations & HuggingFace</div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w15d1"><div><b>D1</b> <a href="https://www.youtube.com/results?search_query=HuggingFace+Transformers+tutorial+beginner" target="_blank">HuggingFace Transformers Basics</a> <span class="exp">(Understand the `transformers` library architecture.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w15d2"><div><b>D2</b> <a href="https://www.youtube.com/results?search_query=Andrej+Karpathy+Let's+build+GPT" target="_blank">Karpathy: Let's build GPT</a> <span class="exp">(Code a miniature GPT from scratch to understand attention.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w15d3"><div><b>D3</b> Run local LLM via Ollama / Llama.cpp <span class="exp">(Install Ollama and run an open-source model completely offline.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w15d4"><div><b>D4</b> <a href="https://www.youtube.com/results?search_query=HuggingFace+pipeline+text+generation" target="_blank">HuggingFace Pipelines</a> <span class="exp">(Use high-level APIs for text generation.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w15d5"><div><b>D5</b> Prompt engineering basics <span class="exp">(System prompts, few-shot learning, and chain-of-thought.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w15d6"><div><b>D6</b> <a href="https://www.youtube.com/results?search_query=LangChain+tutorial+for+beginners" target="_blank">LangChain Tutorial Intro</a> <span class="exp">(Chaining LLM calls with prompts and memory.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w15d7"><div><b>D7</b> Build a simple Python LLM chatbot <span class="exp">(Create a command-line chatbot interface in Python.)</span></div></div>
+<div class="week"><div class="wh">W13 · Dec 7–13 · Isaac Lab Setup + RL Fundamentals</div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w13d1"><div><b>D1</b> <a href="https://isaac-sim.github.io/IsaacLab/main/source/setup/quickstart.html" target="_blank">Isaac Lab Quickstart (install)</a> <span class="exp">(Set up the RL framework built on top of Isaac Sim.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w13d2"><div><b>D2</b> <a href="https://isaac-sim.github.io/IsaacLab/main/source/tutorials/index.html" target="_blank">Isaac Lab Tutorial 1-2</a> <span class="exp">(Navigate the environment and task structure.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w13d3"><div><b>D3</b> <a href="https://isaac-sim.github.io/IsaacLab/main/source/tutorials/index.html" target="_blank">Isaac Lab Tutorial 3</a> <span class="exp">(Understand reward functions and terminations.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w13d4"><div><b>D4</b> <a href="https://www.youtube.com/results?search_query=Isaac+Lab+Office+Hours+RL+Fundamentals" target="_blank">Isaac Lab: RL Fundamentals</a> <span class="exp">(Markov Decision Processes and policy gradients.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w13d5"><div><b>D5</b> Run existing Isaac Lab cartpole env <span class="exp">(Clone Isaac Lab and run the built-in cartpole example.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w13d6"><div><b>D6</b> <a href="https://isaac-sim.github.io/IsaacLab/main/source/tutorials/03_envs/run_rl_training.html" target="_blank">Isaac Lab RL Training (SB3)</a> <span class="exp">(Use Stable Baselines3 to train a basic task.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w13d7"><div><b>D7</b> Train cartpole + modify reward <span class="exp">(Change the reward function and observe changes in behavior.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w13d8"><div><b>D8</b> <a href="https://spinningup.openai.com/en/latest/spinningup/rl_intro.html" target="_blank">Spinning Up RL Part 1</a> <span class="exp">(Core concepts of RL: states, actions, rewards.)</span></div></div>
 </div>
 
-<div class="week"><div class="wh">W16 · Jan 11–17 · RAG (Retrieval-Augmented Generation)</div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w16d1"><div><b>D1</b> <a href="https://www.youtube.com/results?search_query=RAG+Retrieval+Augmented+Generation+explained" target="_blank">RAG Concept & Architecture</a> <span class="exp">(Why RAG prevents hallucinations.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w16d2"><div><b>D2</b> <a href="https://www.youtube.com/results?search_query=LangChain+RAG+tutorial" target="_blank">LangChain RAG Tutorial</a> <span class="exp">(Building a document loader and retriever.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w16d3"><div><b>D3</b> Vector Databases (Pinecone/ChromaDB) <span class="exp">(Store and query high-dimensional embeddings.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w16d4"><div><b>D4</b> Embeddings and Text Splitters <span class="exp">(Convert text to vectors and chunk large documents.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w16d5"><div><b>D5</b> Build a PDF Q&A Bot with RAG <span class="exp">(Build a script that ingests a PDF, chunks it, and answers questions.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w16d6"><div><b>D6</b> Optimize RAG retrieval <span class="exp">(Implement similarity search and re-ranking.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w16d7"><div><b>D7</b> Document RAG pipeline in GitHub <span class="exp">(Upload your RAG pipeline code with instructions.)</span></div></div>
+<div class="week"><div class="wh">W14 · Dec 14–20 · PyTorch RL + PPO Theory</div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w14d1"><div><b>D1</b> <a href="https://spinningup.openai.com/en/latest/spinningup/rl_intro2.html" target="_blank">Spinning Up Part 2</a> <span class="exp">(Bellman equations and Q-learning.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w14d2"><div><b>D2</b> <a href="https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html" target="_blank">Spinning Up Part 3 (PPO)</a> <span class="exp">(Proximal Policy Optimization theory.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w14d3"><div><b>D3</b> <a href="https://www.youtube.com/results?search_query=PPO+Implementation+Details+PyTorch" target="_blank">PPO Implementation Details</a> <span class="exp">(Clipping, advantage estimation, and entropy.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w14d4"><div><b>D4</b> <a href="https://www.youtube.com/results?search_query=PPO+with+PyTorch+Machine+Learning+with+Phil" target="_blank">PPO with PyTorch</a> <span class="exp">(Step-by-step coding of PPO.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w14d5"><div><b>D5</b> <a href="https://docs.pytorch.org/tutorials/intermediate/reinforcement_ppo.html" target="_blank">TorchRL PPO Tutorial</a> <span class="exp">(Using PyTorch's native RL library.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w14d6"><div><b>D6</b> Minimal PPO on CartPole <span class="exp">(Implement a clean, minimal PPO algorithm from scratch in PyTorch.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w14d7"><div><b>D7</b> Review PPO math & optimization <span class="exp">(Solidify understanding of policy gradient theorems.)</span></div></div>
 </div>
 
-<div class="week"><div class="wh">W17 · Jan 18–24 · Fine-Tuning (LoRA/PEFT)</div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w17d1"><div><b>D1</b> <a href="https://www.youtube.com/results?search_query=HuggingFace+PEFT+LoRA+tutorial" target="_blank">PEFT & LoRA Explained</a> <span class="exp">(Low-Rank Adaptation for efficient fine-tuning.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w17d2"><div><b>D2</b> Prepare a dataset for fine-tuning <span class="exp">(Format a dataset of Q&A pairs into the required JSONL format.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w17d3"><div><b>D3</b> QLoRA (Quantized LoRA) setup <span class="exp">(Fine-tune a 4-bit quantized model to save GPU memory.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w17d4"><div><b>D4</b> Fine-tune a small model (Llama-3-8B or Mistral) <span class="exp">(Run the actual training loop on your dataset.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w17d5"><div><b>D5</b> Evaluate fine-tuned model <span class="exp">(Compare outputs before and after fine-tuning.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w17d6"><div><b>D6</b> Merge weights and deploy locally <span class="exp">(Merge the LoRA adapter weights into the base model.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w17d7"><div><b>D7</b> Document fine-tuning process <span class="exp">(Write a markdown doc detailing hyperparameters and results.)</span></div></div>
+<div class="week"><div class="wh">W15 · Jan 4–10 · Sim2Real Theory & System Identification</div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w15d1"><div><b>D1</b> <a href="https://lilianweng.github.io/posts/2019-05-05-domain-randomizations" target="_blank">Lil'Log: Domain Randomization</a> <span class="exp">(Theory of randomizing physics to bridge the sim-to-real gap.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w15d2"><div><b>D2</b> <a href="https://www.youtube.com/results?search_query=Berkeley+CS287+Sim2Real+Lecture" target="_blank">Berkeley CS287 Sim2Real</a> <span class="exp">(Academic overview of Sim2Real techniques.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w15d3"><div><b>D3</b> <a href="https://arxiv.org/abs/1804.10332" target="_blank">Sim-to-Real Agile Locomotion</a> <span class="exp">(Read the seminal paper on sim-to-real robot walking.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w15d4"><div><b>D4</b> Implement domain randomization config <span class="exp">(Write an Isaac Lab config to randomize masses, frictions, and restitution.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w15d5"><div><b>D5</b> System identification basics <span class="exp">(Learn how to estimate real-world robot parameters from spec sheets.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w15d6"><div><b>D6</b> Observation-space design <span class="exp">(Design what the robot sees: proprioception (joint states) and exteroception (IMU/Lidar).)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w15d7"><div><b>D7</b> Write up sim2real notes <span class="exp">(Document your sim2real strategy in markdown.)</span></div></div>
 </div>
 
-<div class="week"><div class="wh">W18 · Jan 25–31 · Integrating LLMs with ROS2</div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w18d1"><div><b>D1</b> Create ROS2 Python node for LLM inference <span class="exp">(Wrap the HuggingFace pipeline in a ROS2 node.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w18d2"><div><b>D2</b> Speech-to-Text (Whisper) integration <span class="exp">(Use OpenAI Whisper to transcribe microphone audio.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w18d3"><div><b>D3</b> Text-to-Speech (TTS) integration <span class="exp">(Convert LLM text responses back to speech.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w18d4"><div><b>D4</b> LLM parses voice commands into ROS2 actions <span class="exp">(Parse LLM text output to extract actions and trigger ROS2 servers.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w18d5"><div><b>D5</b> Test LLM-ROS2 bridge in simulation <span class="exp">(Test the voice-to-action pipeline in Isaac Sim.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w18d6"><div><b>D6</b> Project 3: Capstone architecture design <span class="exp">(Design the architecture diagram for the final Capstone.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w18d7"><div><b>D7</b> Project 3 scaffold <span class="exp">(Create the initial Git repo and folder structure.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w18d8"><div><b>D8</b> <a href="https://www.behaviortree.dev/guide/" target="_blank">BehaviorTree.CPP Basics</a> <span class="exp">(Use LLM to generate a JSON task plan, execute it safely via BT instead of direct ROS2 calls.)</span></div></div>
+<div class="week"><div class="wh">W16 · Jan 11–17 · Humanoid RL & Advanced Control</div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w16d1"><div><b>D1</b> <a href="https://www.figure.ai/news/reinforcement-learning-walking" target="_blank">Figure AI: Natural Humanoid Walk</a> <span class="exp">(Read how Figure AI trains their humanoids.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w16d2"><div><b>D2</b> <a href="https://arxiv.org/html/2303.03381v2" target="_blank">Real-World Humanoid Locomotion</a> <span class="exp">(Read the paper on sim-to-real humanoid walking.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w16d3"><div><b>D3</b> <a href="https://github.com/rohanpsingh/LearningHumanoidWalking" target="_blank">LearningHumanoidWalking Repo</a> <span class="exp">(Clone and inspect the codebase.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w16d4"><div><b>D4</b> Run Isaac Lab humanoid env <span class="exp">(Launch the built-in Isaac Lab humanoid environment.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w16d5"><div><b>D5</b> Train humanoid to stand/walk <span class="exp">(Train a humanoid using PPO to achieve a stable standing or walking gait.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w16d6"><div><b>D6</b> <a href="https://www.youtube.com/results?search_query=Steve+Brunton+Model+Predictive+Control+Bootcamp" target="_blank">Steve Brunton: MPC</a> <span class="exp">(Learn Model Predictive Control for dynamic systems.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w16d7"><div><b>D7</b> Combine RL policy + low-level PD/MPC <span class="exp">(Use RL for high-level target tracking, while PD/MPC handles low-level balance.)</span></div></div>
+</div>
+
+<div class="week"><div class="wh">W17 · Jan 18–24 · Project 2 — Quadruped Walk Policy</div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w17d1"><div><b>D1</b> <a href="https://www.youtube.com/results?search_query=Train+Custom+Quadruped+to+Walk+Isaac+Lab" target="_blank">Train Custom Quadruped to Walk</a> <span class="exp">(Overview of the Spot/Anymal training process.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w17d2"><div><b>D2</b> Set up robot + scene in Isaac Lab <span class="exp">(Import the URDF and configure terrain.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w17d3"><div><b>D3</b> Reward + observation design <span class="exp">(Define what the robot sees and how it's penalized/rewarded.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w17d4"><div><b>D4</b> Train to convergence <span class="exp">(Run the PPO training loop until the robot walks.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w17d5"><div><b>D5</b> Export policy (ONNX/PT) <span class="exp">(Save the trained neural network for deployment.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w17d6"><div><b>D6</b> Demo video + README <span class="exp">(Record training curves and walking behavior.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w17d7"><div><b>D7</b> Publish <b>isaac-lab-quadruped-walk</b> <span class="exp">(Push to GitHub.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w17d8"><div><b>D8</b> <a href="https://developer.nvidia.com/blog/closing-the-sim-to-real-gap-training-spot-quadruped-locomotion-with-nvidia-isaac-lab" target="_blank">NVIDIA Spot Sim2Real Blog</a> <span class="exp">(Read NVIDIA's official approach to training Spot.)</span></div></div>
 </div>
 </div>
 
 <!-- =========== PHASE 4 =========== -->
 <div class="phase" id="p3">
-<div class="pcard"><h2>🟢 Phase 4 — Desktop CAD, SQLite & Local Agent <i>(Feb 2027 · W19–W24)</i></h2>
-<p class="meta">Goal: Build structured local persistence, local RAG, and advanced ImGui/Vulkan CAD layouts for offline robot control.</p>
-<span class="tag">SQLite</span><span class="tag">FAISS</span><span class="tag">Dear ImGui</span><span class="tag">Local Agent</span></div>
+<div class="pcard"><h2>🟩 Phase 4 — Generative AI & Offline RAG Agents <i>(Jan-Feb 2027 · W18–W24)</i></h2>
+<p class="meta">Goal: Give your robot interface a cognitive layer. Hook Local LLMs into your SQLite database and local FAISS vector store to parse commands into ROS2 tasks.</p>
+<span class="tag">LLMs</span><span class="tag">FAISS</span><span class="tag">LoRA</span><span class="tag">Local Agent</span></div>
 
-<div class="week"><div class="wh">W19 · Feb 1–7 · Structured Local Data Persistence (The Database Part)</div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w19d1"><div><b>D1</b> <a href="https://www.youtube.com/results?search_query=SQLite+C%2B%2B+wrapper+tutorial" target="_blank">SQLite C++ Wrapper Integration</a> <span class="exp">(Learn how to embed SQLite into your ImGui app using a modern C++ wrapper.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w19d2"><div><b>D2</b> Design schema for 3D CAD/physics scenes <span class="exp">(Define tables for objects, transforms, hierarchies, and physics properties.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w19d3"><div><b>D3</b> Implement Save/Load scene logic <span class="exp">(Write C++ logic to serialize your 3D workspace state to the SQLite database.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w19d4"><div><b>D4</b> Integrate SQLite with Dear ImGui UI <span class="exp">(Build a custom ImGui file dialog to save/load local scene databases easily.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w19d5"><div><b>D5</b> Async database transactions <span class="exp">(Run heavy SQLite writes in background threads to ensure the Vulkan UI never stutters.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w19d6"><div><b>D6</b> Database versioning and migrations <span class="exp">(Future-proof your CAD app by handling schema updates gracefully.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w19d7"><div><b>D7</b> Test scene persistence <span class="exp">(Save a complex robot URDF scene, close the app, reopen, and verify exact state restoration.)</span></div></div>
+<div class="week"><div class="wh">W18 · Jan 25–31 · LLM Foundations & HuggingFace</div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w18d1"><div><b>D1</b> <a href="https://www.youtube.com/results?search_query=HuggingFace+Transformers+tutorial+beginner" target="_blank">HuggingFace Transformers Basics</a> <span class="exp">(Understand the `transformers` library architecture.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w18d2"><div><b>D2</b> <a href="https://www.youtube.com/results?search_query=Andrej+Karpathy+Let's+build+GPT" target="_blank">Karpathy: Let's build GPT</a> <span class="exp">(Code a miniature GPT from scratch to understand attention.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w18d3"><div><b>D3</b> Run local LLM via Ollama / Llama.cpp <span class="exp">(Install Ollama and run an open-source model completely offline.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w18d4"><div><b>D4</b> <a href="https://www.youtube.com/results?search_query=HuggingFace+pipeline+text+generation" target="_blank">HuggingFace Pipelines</a> <span class="exp">(Use high-level APIs for text generation.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w18d5"><div><b>D5</b> Prompt engineering basics <span class="exp">(System prompts, few-shot learning, and chain-of-thought.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w18d6"><div><b>D6</b> <a href="https://www.youtube.com/results?search_query=LangChain+tutorial+for+beginners" target="_blank">LangChain Tutorial Intro</a> <span class="exp">(Chaining LLM calls with prompts and memory.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w18d7"><div><b>D7</b> Build a simple Python LLM chatbot <span class="exp">(Create a command-line chatbot interface in Python.)</span></div></div>
 </div>
 
-<div class="week"><div class="wh">W20 · Feb 8–14 · Local RAG Integration</div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w20d1"><div><b>D1</b> Master local vector stores (FAISS/ChromaDB) <span class="exp">(Spend time learning how to deploy and query FAISS or embedded ChromaDB locally.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w20d2"><div><b>D2</b> Generate local embeddings offline <span class="exp">(Use a local model to convert CAD documentation and ROS2 docs into vector embeddings.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w20d3"><div><b>D3</b> Build the offline FAISS index <span class="exp">(Create a searchable vector database of all local documentation and CAD files.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w20d4"><div><b>D4</b> C++ bridge for local RAG queries <span class="exp">(Write a C++ interface to query the vector store so your Local Agent can read docs offline.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w20d5"><div><b>D5</b> Integrate RAG with Local Agent <span class="exp">(Your local AI agent now fetches relevant CAD manual context before answering questions.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w20d6"><div><b>D6</b> Optimize retrieval latency <span class="exp">(Profile and optimize vector search speed so agent responses are instant.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w20d7"><div><b>D7</b> Publish repo <b>local-offline-rag-agent</b> <span class="exp">(Push the offline RAG pipeline code to GitHub.)</span></div></div>
+<div class="week"><div class="wh">W19 · Feb 1–7 · Local RAG Integration (The Database Part)</div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w19d1"><div><b>D1</b> <a href="https://www.youtube.com/results?search_query=RAG+Retrieval+Augmented+Generation+explained" target="_blank">RAG Concept & Architecture</a> <span class="exp">(Why RAG prevents hallucinations.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w19d2"><div><b>D2</b> Master local vector stores (FAISS/ChromaDB) <span class="exp">(Spend time learning how to deploy and query FAISS or embedded ChromaDB locally.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w19d3"><div><b>D3</b> Generate local embeddings offline <span class="exp">(Use a local model to convert CAD documentation and ROS2 docs into vector embeddings.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w19d4"><div><b>D4</b> Build the offline FAISS index <span class="exp">(Create a searchable vector database of all local documentation and CAD files.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w19d5"><div><b>D5</b> Embeddings and Text Splitters <span class="exp">(Convert text to vectors and chunk large documents.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w19d6"><div><b>D6</b> C++ bridge for local RAG queries <span class="exp">(Write a C++ interface to query the vector store so your Local Agent can read docs offline.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w19d7"><div><b>D7</b> Integrate RAG with Local Agent <span class="exp">(Your local AI agent now fetches relevant CAD manual context before answering questions.)</span></div></div>
 </div>
 
-<div class="week"><div class="wh">W21 · Feb 15–21 · ImGui Viewport Optimization (Vulkan Canvas)</div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w21d1"><div><b>D1</b> Watch ImGui video lessons <span class="exp">(Study official Dear ImGui video lessons focusing on advanced rendering and viewport handling.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w21d2"><div><b>D2</b> Read articles on connecting Vulkan with ImGui <span class="exp">(Deep-dive into articles explaining ImGui_ImplVulkan render pass integration and framebuffer management.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w21d3"><div><b>D3</b> Build custom 3D manipulation gizmos <span class="exp">(Spend the day implementing custom translation/rotation arrows for your 3D CAD canvas.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w21d4"><div><b>D4</b> Implement dockable layouts <span class="exp">(Spend time building a robust, dockable CAD layout using the Dear ImGui docking branch.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w21d5"><div><b>D5</b> Write custom Vulkan shaders for the canvas <span class="exp">(Implement custom shaders for grid rendering, object highlighting, and depth visualization.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w21d6"><div><b>D6</b> Optimize viewport rendering <span class="exp">(Profile the Vulkan render loop to guarantee high FPS during 3D object manipulation.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w21d7"><div><b>D7</b> Polish desktop CAD viewport <span class="exp">(Refine the UI, ensuring smooth interaction between the dockable ImGui panels and the Vulkan canvas.)</span></div></div>
+<div class="week"><div class="wh">W20 · Feb 8–14 · Fine-Tuning (LoRA/PEFT)</div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w20d1"><div><b>D1</b> <a href="https://www.youtube.com/results?search_query=HuggingFace+PEFT+LoRA+tutorial" target="_blank">PEFT & LoRA Explained</a> <span class="exp">(Low-Rank Adaptation for efficient fine-tuning.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w20d2"><div><b>D2</b> Prepare a dataset for fine-tuning <span class="exp">(Format a dataset of Q&A pairs into the required JSONL format.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w20d3"><div><b>D3</b> QLoRA (Quantized LoRA) setup <span class="exp">(Fine-tune a 4-bit quantized model to save GPU memory.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w20d4"><div><b>D4</b> Fine-tune a small model (Llama-3-8B or Mistral) <span class="exp">(Run the actual training loop on your dataset.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w20d5"><div><b>D5</b> Evaluate fine-tuned model <span class="exp">(Compare outputs before and after fine-tuning.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w20d6"><div><b>D6</b> Merge weights and deploy locally <span class="exp">(Merge the LoRA adapter weights into the base model.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w20d7"><div><b>D7</b> Document fine-tuning process <span class="exp">(Write a markdown doc detailing hyperparameters and results.)</span></div></div>
 </div>
 
-<div class="week"><div class="wh">W22 · Feb 22–28 · Deepen Local Agent Integration</div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w22d1"><div><b>D1</b> Optimize llama.cpp execution locally <span class="exp">(Spend more time compiling and tuning llama.cpp for your hardware to run the local agent instantly.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w22d2"><div><b>D2</b> TensorRT execution for agent acceleration <span class="exp">(Optimize TensorRT execution for any perception or parsing models the local agent uses.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w22d3"><div><b>D3</b> Instant instruction parsing pipeline <span class="exp">(Build a C++ pipeline so your local agent can instantly parse text/voice instructions without latency.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w22d4"><div><b>D4</b> Manipulate 3D physics workspace via Agent <span class="exp">(Connect the local agent's outputs directly to manipulate the ImGui/Vulkan 3D physics workspace objects.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w22d5"><div><b>D5</b> Eradicate micro-stutters during inference <span class="exp">(Profile the ImGui/Vulkan + Local Agent loop using Nsight to ensure your local agent can manipulate the workspace without micro-stutters.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w22d6"><div><b>D6</b> Agent-driven ROS2 actions <span class="exp">(The local agent triggers ROS2 actions based on the 3D workspace state and parsed commands.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w22d7"><div><b>D7</b> Publish repo <b>local-agent-3d-workspace</b> <span class="exp">(Push the integrated ImGui/Vulkan + Local Agent codebase to GitHub.)</span></div></div>
+<div class="week"><div class="wh">W21 · Feb 15–21 · Deepen Local Agent Integration</div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w21d1"><div><b>D1</b> Optimize llama.cpp execution locally <span class="exp">(Spend more time compiling and tuning llama.cpp for your hardware to run the local agent instantly.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w21d2"><div><b>D2</b> TensorRT execution for agent acceleration <span class="exp">(Optimize TensorRT execution for any perception or parsing models the local agent uses.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w21d3"><div><b>D3</b> Instant instruction parsing pipeline <span class="exp">(Build a C++ pipeline so your local agent can instantly parse text/voice instructions without latency.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w21d4"><div><b>D4</b> Manipulate 3D physics workspace via Agent <span class="exp">(Connect the local agent's outputs directly to manipulate the ImGui/Vulkan 3D physics workspace objects.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w21d5"><div><b>D5</b> Eradicate micro-stutters during inference <span class="exp">(Profile the ImGui/Vulkan + Local Agent loop using Nsight to ensure your local agent can manipulate the workspace without micro-stutters.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w21d6"><div><b>D6</b> Agent-driven ROS2 actions <span class="exp">(The local agent triggers ROS2 actions based on the 3D workspace state and parsed commands.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w21d7"><div><b>D7</b> Publish repo <b>local-agent-3d-workspace</b> <span class="exp">(Push the integrated ImGui/Vulkan + Local Agent codebase to GitHub.)</span></div></div>
 </div>
 
-<div class="week"><div class="wh">W23 · Mar 1–7 · Sim2Real Theory & System Identification</div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w23d1"><div><b>D1</b> <a href="https://lilianweng.github.io/posts/2019-05-05-domain-randomizations" target="_blank">Lil'Log: Domain Randomization</a> <span class="exp">(Theory of randomizing physics to bridge the sim-to-real gap.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w23d2"><div><b>D2</b> <a href="https://www.youtube.com/results?search_query=Berkeley+CS287+Sim2Real+Lecture" target="_blank">Berkeley CS287 Sim2Real</a> <span class="exp">(Academic overview of Sim2Real techniques.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w23d3"><div><b>D3</b> <a href="https://arxiv.org/abs/1804.10332" target="_blank">Sim-to-Real Agile Locomotion</a> <span class="exp">(Read the seminal paper on sim-to-real robot walking.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w23d4"><div><b>D4</b> Implement domain randomization config <span class="exp">(Write an Isaac Lab config to randomize masses, frictions, and restitution.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w23d5"><div><b>D5</b> System identification basics <span class="exp">(Learn how to estimate real-world robot parameters from spec sheets.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w23d6"><div><b>D6</b> Observation-space design <span class="exp">(Design what the robot sees: proprioception (joint states) and exteroception (IMU/Lidar).)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w23d7"><div><b>D7</b> Write up sim2real notes <span class="exp">(Document your sim2real strategy in markdown.)</span></div></div>
-</div>
-
-<div class="week"><div class="wh">W24 · Mar 8–14 · NVIDIA Spot Sim2Real + Jetson Setup</div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w24d1"><div><b>D1</b> <a href="https://developer.nvidia.com/blog/closing-the-sim-to-real-gap-training-spot-quadruped-locomotion-with-nvidia-isaac-lab" target="_blank">NVIDIA Spot Sim2Real Blog</a> <span class="exp">(Read NVIDIA's official approach to training Spot.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w24d2"><div><b>D2</b> Reproduce Spot training config in Isaac Lab <span class="exp">(Clone and run the Spot training configuration.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w24d3"><div><b>D3</b> <a href="https://developer.nvidia.com/embedded/learn/tutorials" target="_blank">NVIDIA Jetson Tutorials</a> <span class="exp">(Understand Jetson architecture and JetPack OS.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w24d4"><div><b>D4</b> <a href="https://www.jetson-ai-lab.com/tutorials" target="_blank">Jetson AI Lab Tutorials</a> <span class="exp">(Explore edge AI deployment tutorials.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w24d5"><div><b>D5</b> TensorRT inference basics <span class="exp">(Learn how to convert PyTorch models to TensorRT engines for faster inference.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w24d6"><div><b>D6</b> Plan capstone sim2real deployment <span class="exp">(Outline the exact hardware and software steps for the final capstone deployment.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w24d7"><div><b>D7</b> Project 4 scaffold <span class="exp">(Initialize the final capstone repository.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w24d8"><div><b>D8</b> <a href="https://wiki.ros.org/cv_bridge/Tutorials" target="_blank">cv_bridge & OpenCV Basics</a> <span class="exp">(Convert ROS2 images to OpenCV matrices for preprocessing before DL inference.)</span></div></div>
+<div class="week"><div class="wh">W22 · Feb 22–28 · LLM + ROS2 + BehaviorTree.CPP</div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w22d1"><div><b>D1</b> Create ROS2 Python node for LLM inference <span class="exp">(Wrap the HuggingFace pipeline in a ROS2 node.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w22d2"><div><b>D2</b> Speech-to-Text (Whisper) integration <span class="exp">(Use OpenAI Whisper to transcribe microphone audio.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w22d3"><div><b>D3</b> Text-to-Speech (TTS) integration <span class="exp">(Convert LLM text responses back to speech.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w22d4"><div><b>D4</b> LLM parses voice commands into ROS2 actions <span class="exp">(Parse LLM text output to extract actions and trigger ROS2 servers.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w22d5"><div><b>D5</b> <a href="https://www.behaviortree.dev/guide/" target="_blank">BehaviorTree.CPP Basics</a> <span class="exp">(Use LLM to generate a JSON task plan, execute it safely via BT instead of direct ROS2 calls.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w22d6"><div><b>D6</b> Test LLM-ROS2 bridge in simulation <span class="exp">(Test the voice-to-action pipeline in Isaac Sim.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w22d7"><div><b>D7</b> Project 3: Capstone architecture design <span class="exp">(Design the architecture diagram for the final Capstone.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w22d8"><div><b>D8</b> Project 3 scaffold <span class="exp">(Create the initial Git repo and folder structure.)</span></div></div>
 </div>
 </div>
 
 <!-- =========== PHASE 5 =========== -->
 <div class="phase" id="p4">
-<div class="pcard"><h2>🔴 Phase 5 — Isaac ROS & Sim2Real <i>(Mar–Apr 2027 · W25–W28)</i></h2>
-<p class="meta">Goal: Deploy perception and RL policies on Jetson edge hardware.</p>
+<div class="pcard"><h2>🟩 Phase 5 — Isaac ROS & Edge Hardware Deployment <i>(Mar–Apr 2027 · W23–W28)</i></h2>
+<p class="meta">Goal: Optimize everything built so far (RL policies, AI parsing, Perception) to run on Jetson hardware under tight constraints.</p>
 <span class="tag">Isaac ROS</span><span class="tag">Jetson</span><span class="tag">TensorRT</span></div>
 
-<div class="week"><div class="wh">W25 · Mar 15–21 · Isaac ROS Perception</div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w25d1"><div><b>D1</b> <a href="https://nvidia-isaac-ros.github.io/getting_started/index.html" target="_blank">Isaac ROS Getting Started</a> <span class="exp">(Install the Isaac ROS hardware-accelerated packages.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w25d2"><div><b>D2</b> <a href="https://github.com/NVIDIA-ISAAC-ROS" target="_blank">Isaac ROS AprilTags</a> <span class="exp">(Detect fiducial markers for precise robot localization.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w25d3"><div><b>D3</b> Isaac ROS object detection (DOPE/CenterPose) <span class="exp">(Run 6-DoF object pose estimation models.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w25d4"><div><b>D4</b> Run perception pipeline in sim <span class="exp">(Test the perception pipeline in Isaac Sim.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w25d5"><div><b>D5</b> Isaac ROS visual SLAM (cuVSLAM) <span class="exp">(Use GPU-accelerated SLAM for mapping.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w25d6"><div><b>D6</b> Map a simulated room <span class="exp">(Generate a 2D/3D occupancy grid of a room.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w25d7"><div><b>D7</b> Navigate to goal with perception <span class="exp">(Send a Nav2 goal using perceived landmarks.)</span></div></div>
+<div class="week"><div class="wh">W23 · Mar 1–7 · Isaac ROS Perception</div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w23d1"><div><b>D1</b> <a href="https://nvidia-isaac-ros.github.io/getting_started/index.html" target="_blank">Isaac ROS Getting Started</a> <span class="exp">(Install the Isaac ROS hardware-accelerated packages.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w23d2"><div><b>D2</b> <a href="https://github.com/NVIDIA-ISAAC-ROS" target="_blank">Isaac ROS AprilTags</a> <span class="exp">(Detect fiducial markers for precise robot localization.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w23d3"><div><b>D3</b> Isaac ROS object detection (DOPE/CenterPose) <span class="exp">(Run 6-DoF object pose estimation models.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w23d4"><div><b>D4</b> Run perception pipeline in sim <span class="exp">(Test the perception pipeline in Isaac Sim.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w23d5"><div><b>D5</b> Isaac ROS visual SLAM (cuVSLAM) <span class="exp">(Use GPU-accelerated SLAM for mapping.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w23d6"><div><b>D6</b> Map a simulated room <span class="exp">(Generate a 2D/3D occupancy grid of a room.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w23d7"><div><b>D7</b> Navigate to goal with perception <span class="exp">(Send a Nav2 goal using perceived landmarks.)</span></div></div>
 </div>
 
-<div class="week"><div class="wh">W26 · Mar 22–28 · Deploy Inference on Jetson</div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w26d1"><div><b>D1</b> Configure Isaac ROS for Jetson <span class="exp">(Set up the Docker containers on the Jetson device.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w26d2"><div><b>D2</b> TensorRT optimization of PyTorch model <span class="exp">(Convert your PyTorch RL policy to TensorRT and measure FPS boost.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w26d3"><div><b>D3</b> Run RL policy inference on Jetson <span class="exp">(Write a C++ ROS2 node that loads the TensorRT engine and runs inference.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w26d4"><div><b>D4</b> Measure latency/throughput <span class="exp">(Measure end-to-end latency from sensor input to motor command output.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w26d5"><div><b>D5</b> Optimize pipeline <span class="exp">(Optimize by using FP16/INT8, batching, or reducing observation size.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w26d6"><div><b>D6</b> Document benchmark <span class="exp">(Write a comprehensive markdown report of your Jetson benchmarks.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w26d7"><div><b>D7</b> Commit benchmark report <span class="exp">(Push the benchmark report and TensorRT scripts to GitHub.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w26d8"><div><b>D8</b> Linux Hardware Interfacing <span class="exp">(Write udev rules for static sensor names like /dev/lidar. Create systemd service to auto-start ROS2 on Jetson boot.)</span></div></div>
+<div class="week"><div class="wh">W24 · Mar 8–14 · Jetson Setup & TensorRT Optimization</div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w24d1"><div><b>D1</b> <a href="https://developer.nvidia.com/embedded/learn/tutorials" target="_blank">NVIDIA Jetson Tutorials</a> <span class="exp">(Understand Jetson architecture and JetPack OS.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w24d2"><div><b>D2</b> <a href="https://www.jetson-ai-lab.com/tutorials" target="_blank">Jetson AI Lab Tutorials</a> <span class="exp">(Explore edge AI deployment tutorials.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w24d3"><div><b>D3</b> TensorRT inference basics <span class="exp">(Learn how to convert PyTorch models to TensorRT engines for faster inference.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w24d4"><div><b>D4</b> Configure Isaac ROS for Jetson <span class="exp">(Set up the Docker containers on the Jetson device.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w24d5"><div><b>D5</b> TensorRT optimization of PyTorch model <span class="exp">(Convert your PyTorch RL policy to TensorRT and measure FPS boost.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w24d6"><div><b>D6</b> Plan capstone sim2real deployment <span class="exp">(Outline the exact hardware and software steps for the final capstone deployment.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w24d7"><div><b>D7</b> Project 4 scaffold <span class="exp">(Initialize the final capstone repository.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w24d8"><div><b>D8</b> <a href="https://wiki.ros.org/cv_bridge/Tutorials" target="_blank">cv_bridge & OpenCV Basics</a> <span class="exp">(Convert ROS2 images to OpenCV matrices for preprocessing before DL inference.)</span></div></div>
 </div>
 
-<div class="week"><div class="wh">W27 · Mar 29–Apr 4 · Humanoid RL & Advanced Control</div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w27d1"><div><b>D1</b> <a href="https://www.figure.ai/news/reinforcement-learning-walking" target="_blank">Figure AI: Natural Humanoid Walk</a> <span class="exp">(Read how Figure AI trains their humanoids.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w27d2"><div><b>D2</b> <a href="https://arxiv.org/html/2303.03381v2" target="_blank">Real-World Humanoid Locomotion</a> <span class="exp">(Read the paper on sim-to-real humanoid walking.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w27d3"><div><b>D3</b> <a href="https://github.com/rohanpsingh/LearningHumanoidWalking" target="_blank">LearningHumanoidWalking Repo</a> <span class="exp">(Clone and inspect the codebase.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w27d4"><div><b>D4</b> Run Isaac Lab humanoid env <span class="exp">(Launch the built-in Isaac Lab humanoid environment.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w27d5"><div><b>D5</b> Train humanoid to stand/walk <span class="exp">(Train a humanoid using PPO to achieve a stable standing or walking gait.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w27d6"><div><b>D6</b> <a href="https://www.youtube.com/results?search_query=Steve+Brunton+Model+Predictive+Control+Bootcamp" target="_blank">Steve Brunton: MPC</a> <span class="exp">(Learn Model Predictive Control for dynamic systems.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w27d7"><div><b>D7</b> Combine RL policy + low-level PD/MPC <span class="exp">(Use RL for high-level target tracking, while PD/MPC handles low-level balance.)</span></div></div>
+<div class="week"><div class="wh">W25 · Mar 15–21 · Run RL Policy Inference on Jetson</div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w25d1"><div><b>D1</b> Run RL policy inference on Jetson <span class="exp">(Write a C++ ROS2 node that loads the TensorRT engine and runs inference.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w25d2"><div><b>D2</b> Measure latency/throughput <span class="exp">(Measure end-to-end latency from sensor input to motor command output.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w25d3"><div><b>D3</b> Optimize pipeline <span class="exp">(Optimize by using FP16/INT8, batching, or reducing observation size.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w25d4"><div><b>D4</b> Document benchmark <span class="exp">(Write a comprehensive markdown report of your Jetson benchmarks.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w25d5"><div><b>D5</b> Commit benchmark report <span class="exp">(Push the benchmark report and TensorRT scripts to GitHub.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w25d6"><div><b>D6</b> Isaac ROS object detection (DOPE/CenterPose) <span class="exp">(Run 6-DoF object pose estimation models.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w25d7"><div><b>D7</b> Run perception pipeline in sim <span class="exp">(Test the perception pipeline in Isaac Sim.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w25d8"><div><b>D8</b> Isaac ROS visual SLAM (cuVSLAM) <span class="exp">(Use GPU-accelerated SLAM for mapping.)</span></div></div>
 </div>
 
-<div class="week"><div class="wh">W28 · Apr 5–11 · Capstone Integration (The Big Build)</div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w28d1"><div><b>D1</b> Train RL policy in Isaac Lab <span class="exp">(Finalize and train the RL locomotion policy for the capstone.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w28d2"><div><b>D2</b> Export policy + TensorRT conversion <span class="exp">(Export the policy and convert it to TensorRT for deployment.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w28d3"><div><b>D3</b> Write C++ ROS2 node for RL inference <span class="exp">(Write the C++ node that loads the TensorRT engine.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w28d4"><div><b>D4</b> Integrate Fine-Tuned LLM for voice commands <span class="exp">(Connect the fine-tuned LLM to parse voice into BehaviorTree tasks.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w28d5"><div><b>D5</b> Integrate Dear ImGui Desktop Dashboard for telemetry <span class="exp">(Connect the ImGui dashboard to visualize the robot's real-time state.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w28d6"><div><b>D6</b> Integrate Desktop App for remote control <span class="exp">(Connect the ImGui/Vulkan desktop app to send teleop and voice commands.)</span></div></div>
-<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w28d7"><div><b>D7</b> Full system integration test in sim <span class="exp">(Run the full stack in simulation to verify all components communicate.)</span></div></div>
+<div class="week"><div class="wh">W26 · Mar 22–28 · Linux Hardware Interfacing & Sim2Real Deployment Prep</div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w26d1"><div><b>D1</b> Map a simulated room <span class="exp">(Generate a 2D/3D occupancy grid of a room.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w26d2"><div><b>D2</b> Navigate to goal with perception <span class="exp">(Send a Nav2 goal using perceived landmarks.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w26d3"><div><b>D3</b> Linux Hardware Interfacing <span class="exp">(Write udev rules for static sensor names like /dev/lidar. Create systemd service to auto-start ROS2 on Jetson boot.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w26d4"><div><b>D4</b> <a href="https://arxiv.org/abs/1804.10332" target="_blank">Sim-to-Real Agile Locomotion</a> <span class="exp">(Read the seminal paper on sim-to-real robot walking.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w26d5"><div><b>D5</b> Reproduce Spot training config in Isaac Lab <span class="exp">(Clone and run the Spot training configuration.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w26d6"><div><b>D6</b> System identification basics <span class="exp">(Learn how to estimate real-world robot parameters from spec sheets.)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w26d7"><div><b>D7</b> Observation-space design <span class="exp">(Design what the robot sees: proprioception (joint states) and exteroception (IMU/Lidar).)</span></div></div>
+<div class="chk"><input type="checkbox" onchange="updateProgress()" data-id="w26d8"><div><b>D8</b> Write up sim2real notes <span class="exp">(Document your sim2real strategy in markdown.)</span></div></div>
 </div>
 </div>
 
 <!-- =========== PHASE 6 =========== -->
 <div class="phase" id="p5">
-<div class="pcard"><h2>⚫ Phase 6 — Capstone & Apply <i>(Apr–May 2027 · W29–W32)</i></h2>
+<div class="pcard"><h2>🟩 Phase 6 — Capstone & Apply <i>(Apr–May 2027 · W29–W32)</i></h2>
 <p class="meta">Goal: Polish the Unicorn Project, prep resume, apply to NVIDIA.</p>
 <span class="tag">Capstone</span><span class="tag">Portfolio</span><span class="tag">Apply</span></div>
 
@@ -463,7 +444,7 @@
 <!-- =========== PROJECTS =========== -->
 <div class="phase" id="p6">
 <div class="pcard"><h2>🚀 Project Portfolio</h2><p class="meta">4 projects that prove you are a Full-Stack AI Robotics Engineer.</p>
-<div class="project"><b>P1 · ROS2 + Isaac Sim + ImGui Telemetry</b> <span class="stack">[C++17, Dear ImGui, ROS2, Isaac Sim, CMake]</span><div style="margin-top:5px">Differential drive robot navigated in Isaac Sim, with a custom Dear ImGui desktop app displaying real-time sensor data and PID tuning.</div>
+<div class="project"><b>P1 · ROS2 + Isaac Sim + ImGui/Vulkan + SQLite Telemetry</b> <span class="stack">[C++17, Dear ImGui, Vulkan, SQLite, ROS2, CMake]</span><div style="margin-top:5px">Differential drive robot navigated in Isaac Sim, with a custom Dear ImGui/Vulkan desktop app displaying real-time sensor data, PID tuning, and saving workspace configs via SQLite.</div>
 <div class="chk" style="margin-top:5px"><input type="checkbox" onchange="updateProgress()" data-id="pj1"><div>Repo + README + demo video published</div></div></div>
 <div class="project"><b>P2 · Quadruped RL Policy (Isaac Lab)</b> <span class="stack">[Python, PyTorch, Isaac Lab, PPO, CUDA]</span><div style="margin-top:5px">Train a quadruped to walk using PPO in Isaac Lab. Export policy for deployment.</div>
 <div class="chk" style="margin-top:5px"><input type="checkbox" onchange="updateProgress()" data-id="pj2"><div>Repo + README + training curves + demo published</div></div></div>
@@ -517,7 +498,7 @@
 <div class="res">
 <div class="cat">Robotics Math</div>
 <a href="https://hades.mech.northwestern.edu/index.php/Modern_Robotics" target="_blank">Modern Robotics (Kevin Lynch)</a>
-<div class="desc">Free textbook on rigid-body motion, kinematics, and dynamics. The official companion to the video series in Week 6.</div>
+<div class="desc">Free textbook on rigid-body motion, kinematics, and dynamics. The official companion to the video series in Week 5.</div>
 </div>
 <div class="res">
 <div class="cat">Deep Learning</div>
@@ -527,7 +508,7 @@
 <div class="res">
 <div class="cat">Reinforcement Learning</div>
 <a href="https://spinningup.openai.com/" target="_blank">OpenAI Spinning Up</a>
-<div class="desc">The best free resource for understanding PPO, policy gradients, and RL terminology. Read alongside Week 12.</div>
+<div class="desc">The best free resource for understanding PPO, policy gradients, and RL terminology. Read alongside Week 14.</div>
 </div>
 <div class="res">
 <div class="cat">Graphics & CAD</div>
